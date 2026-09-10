@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Principal - SISBAR</title>
+
+    <!-- Material Icons & Materialize CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> <!-- web:9 -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> <!-- web:9 -->
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"> <!-- web:3 -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <!-- web:3 -->
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@100..900&family=Barlow+Condensed:wght@200&family=Karla:ital,wght@0,200..800;1,200..800&family=Oswald:wght@200&family=Playfair+Display+SC:wght@400..900&family=Space+Grotesk:wght@300&display=swap"
+        rel="stylesheet"> <!-- web:3 -->
+
+    <!-- CSS Personalizado -->
+    <link rel="stylesheet" href="/CSS/panel usuario/dashboard-principal.css">
+</head>
+<body>
+<!-- ================== LAYOUT ================== -->
+<div class="dashboard">
+
+    <!-- ============ SIDEBAR ============ -->
+    <aside class="sidebar" aria-label="Navegación principal"> <!-- web:4 -->
+        <header class="sidebar-header">
+            <div class="fila-superior">
+                <div class="icono" aria-hidden="true">
+                    <i class="material-icons">content_cut</i>
+                </div>
+                <h2 class="titulo-app">SISBAR</h2>
+            </div>
+            <p>Portal del Cliente</p>
+        </header>
+
+        <nav class="menu" aria-label="Menú lateral"> <!-- web:4 -->
+            <ul>
+                <li class="activo">
+                    <a href="">
+                        <i class="material-icons" aria-hidden="true">event</i>
+                        <span>Inicio</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/panel usuario/agendarcita.html">
+                        <i class="material-icons" aria-hidden="true">event_available</i>
+                        <span>Agendar Cita</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/panel usuario/miscitas.html">
+                        <i class="material-icons" aria-hidden="true">schedule</i>
+                        <span>Mis Citas</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/panel usuario/productos.html">
+                        <i class="material-icons" aria-hidden="true">inventory_2</i>
+                        <span>Productos</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/panel usuario/miperfil.html" >
+                        <i class="material-icons" aria-hidden="true">account_circle</i>
+                        <span>Mi Perfil</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/Pagina de Inicio/index.html" class="cerrar-sesion">
+                        <i class="material-icons" aria-hidden="true">logout</i>
+                        <span>Cerrar Sesión</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- ============ CONTENIDO ============ -->
+    <div class="contenido">
+
+        <!-- Barra Superior -->
+        <header class="topbar">
+
+            <nav class="nav-wrapper">
+                <!-- Logo -->
+                <a href="#" class="brand-logo">
+                    <img src="/IMAGES/logo-sisbar.png" alt="Logo SISBAR">
+                </a>
+
+                <!-- Hamburguesa Móvil -->
+                <a href="#" class="sidenav-trigger" data-target="mobile-menu" aria-label="Abrir menú móvil">
+                    <i class="material-icons">menu</i>
+                </a>
+
+                <div class="usuario">
+                    <div class="avatar" aria-hidden="true">
+                        C
+                    </div>
+                    <span>Carlos Ramírez</span>
+                </div>
+                
+            </nav>
+
+            <!-- Menú móvil -->
+            <ul class="sidenav" id="mobile-menu">
+                <li class="sidebar-header">
+                    <div class="fila-superior">
+                        <div class="icono" aria-hidden="true">
+                            <i class="material-icons">content_cut</i>
+                        </div>
+                        <h2>SISBAR</h2>
+                    </div>
+                    <p>Portal del Cliente</p>
+                </li>
+
+                <li class="activo">
+                    <a href="">
+                        <i class="material-icons" aria-hidden="true">event</i>
+                        <span>Inicio</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/panel usuario/agendarcita.html">
+                        <i class="material-icons" aria-hidden="true">event_available</i>
+                        <span>Agendar Cita</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/panel usuario/miscitas.html">
+                        <i class="material-icons" aria-hidden="true">schedule</i>
+                        <span>Mis Citas</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/panel usuario/productos.html">
+                        <i class="material-icons" aria-hidden="true">inventory_2</i>
+                        <span>Productos</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/panel usuario/miperfil.html" >
+                        <i class="material-icons" aria-hidden="true">account_circle</i>
+                        <span>Mi Perfil</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/Pagina de Inicio/index.html" class="cerrar-sesion">
+                        <i class="material-icons" aria-hidden="true">logout</i>
+                        <span>Cerrar Sesión</span>
+                    </a>
+                </li>
+
+            </ul>
+        </header>
+
+        <!-- Contenido principal -->
+        
+        <!-- Fondo de estrellas -->
+        <div class="stars-background">
+            <div id="stars"></div>
+            <div id="stars2"></div>
+            <div id="stars3"></div>
+            
+            <main class="principal">
+                <section class="bienvenida">
+                    <h3>Panel del cliente</h3>
+                    <h1>Bienvenido, <span>Carlos</span></h1>
+                    <p>Gestiona tus citas y tus servicios desde aquí</p>
+                </section>
+
+                <section class="imfo-general" aria-label="Información general">
+                    <article class="caja">
+                        <i class="material-icons" aria-hidden="true">event</i>
+                        <h4>6</h4>
+                        <p>citas programadas</p>
+                    </article>
+
+                    <article class="caja">
+                        <i class="material-icons" aria-hidden="true">content_cut</i>
+                        <h4>3</h4>
+                        <p>servicios disponibles</p>
+                    </article>
+
+                    <article class="caja">
+                        <i class="material-icons" aria-hidden="true">content_cut</i>
+                        <h4>1</h4>
+                        <p>productos en tienda</p>
+                    </article>
+                </section>
+
+                <section class="paneles">
+                    <!-- Próximas citas -->
+                    <section class="panel" aria-label="Próximas citas">
+                        <div class="enlace-titulo">
+                            <h4>Próximas citas</h4>
+                            <a href="#">Ver todas</a>
+                        </div>
+
+                        <!-- Bloques de cita (puedes generarlos dinámicamente) -->
+                        <article class="imfo-citas">
+                            <div class="div-citas">
+                                <h5>Corte Básico + Cejas</h5>
+                                <div class="name-cliente-date">
+                                    <p>Osmar Daniel Ortiz Miranda</p>
+                                    <span>-</span>
+                                    <p>2026-07-15</p>
+                                </div>
+                            </div>
+                        </article>
+                    </section>
+
+                    <!-- Accesos rápidos -->
+                    <section class="panel panel-modificacion" aria-label="Accesos rápidos">
+                        <div class="enlace-titulo">
+                            <h4>Accesos rápidos</h4>
+                        </div>
+
+                        <div class="contenedor-botones">
+                            <div class="accesos-botones">
+
+                                <button type="button" class="agendar-cita">
+                                    <div class="div-botones">
+                                        <i class="material-icons" aria-hidden="true">event</i>
+                                        <p>Agendar Cita</p>
+                                    </div>
+                                </button>
+
+                                <button type="button" class="mis-citas">
+                                    <div class="div-botones">
+                                        <i class="material-icons" aria-hidden="true">schedule</i>
+                                        <p>Mis Citas</p>
+                                    </div>
+                                </button>
+                            </div>
+
+                            <div class="accesos-botones">
+
+                                <button type="button" class="productos">
+                                    <div class="div-botones">
+                                        <i class="material-icons" aria-hidden="true">inventory_2</i>
+                                        <p>Productos</p>
+                                    </div>
+                                </button>
+
+                                <button type="button" class="mi-perfil">
+                                    <div class="div-botones">
+                                        <i class="material-icons" aria-hidden="true">account_circle</i>
+                                        <p>Mi Perfil</p>
+                                    </div>
+                                </button>
+
+                            </div>
+                        </div>
+                    </section>
+                </section>
+            </main>
+    </div>
+</div>
+</div>
+
+<!-- JavaScript de Materialize -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> <!-- web:9 -->
+<script src="/JS/panelUsuario.js/dashboard-pincipal.js"></script>
+
+</body>
+</html>

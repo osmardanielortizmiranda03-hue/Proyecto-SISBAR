@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SISBAR - Iniciar Sesión</title>
+
+    <!-- Iconos de Google Material Design -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Framework Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Tipografía Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Estilos Personalizados -->
+    <link rel="stylesheet" href="/CSS/pagina de inicio/iniciar-sesion.css">
+</head>
+<body>
+
+    <!-- Contenedor Principal de la Tarjeta de Login -->
+    <div class="contenedor-login">
+
+        <!-- Botón Superior para Regresar -->
+        <div class="regresar-inicio">
+            <a href="/Pagina de Inicio/index.html">VOLVER AL INICIO</a>
+        </div>
+
+        <!-- Encabezado: Logo y Títulos de Bienvenida -->
+        <div class="logo-sisbar">
+            <img src="/IMAGES/logo-sisbar.png" alt="Logo SISBAR">
+            <h2>SISBAR
+                <span>"Estilo y Cuidado"</span>
+            </h2>
+            <h2 class="h2-bienvenido">Bienvenidos a SISBAR</h2>
+            <p>Selecciona tu perfil e ingresa tus credenciales</p>
+        </div>
+        
+        <!-- Sección de Selección de Perfil (Usuario, Barbero, Administrador) -->
+        <div class="login-general">
+            <div class="login-perfil login-usuario">
+                <button type="button" class="waves-effect waves-light">
+                    <i class="material-icons">person_outline</i>
+                    <h3>Usuario</h3>
+                    <p>Agenda y gestiona tus citas</p>
+                </button>
+            </div>
+            <div class="login-perfil login-barbero">
+                <button type="button">
+                    <i class="material-icons">content_cut</i>
+                    <h3>Barbero</h3>
+                    <p>Gestiona tu agenda de trabajo</p>
+                </button>
+            </div>
+            <div class="login-perfil login-administrador">
+                <button type="button">
+                    <i class="material-icons">settings</i>
+                    <h3>Administrador</h3>
+                    <p>Control total del sistema</p>
+                </button>
+            </div>
+        </div>
+
+        <!-- Formulario de Credenciales -->
+        <form class="login-form" action="#" method="post">
+
+            <!-- Campo: Correo Electrónico -->
+            <div class="input-container email">
+                <label for="email">Correo electrónico</label>
+                <input type="email" id="email" name="email" placeholder="example@gmail.com" required>
+                <i class="material-icons field-icon">email</i>
+            </div>
+
+            <!-- Campo: Contraseña -->
+            <div class="input-container password">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password" placeholder="••••••••" required>
+                <i class="material-icons field-icon">visibility</i>
+            </div>
+
+            <!-- Fila Inferior: Checkbox y Recuperación de Contraseña -->
+            <div class="enlaces-checkbox">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" class="filled-in" />
+                        <span>Recordarme</span>
+                    </label>
+                </div>
+                <div class="contraseña-forget">
+                    <a href="#">¿Olvidaste Tu Contraseña?</a>
+                </div>
+            </div>
+
+            <!-- Botón de Envío del Formulario -->
+            <div class="iniciar-sesion">
+                <button type="submit" class="waves-effect waves-light btn-large btn-login">
+                    <i class="material-icons">login</i> Iniciar Sesión
+                </button>
+            </div>
+
+            <!-- Enlace alternativo para crear cuenta -->
+            <div class="iniciar-sesion-link">
+                ¿No tienes cuenta? <a href="/Pagina de Inicio/registro.html">Regístrate</a>
+            </div>
+
+        </form>
+    </div>
+
+    <!-- Scripts de Materialize JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>

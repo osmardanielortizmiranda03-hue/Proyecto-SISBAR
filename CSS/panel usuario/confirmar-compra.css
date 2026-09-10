@@ -1,0 +1,381 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    }
+
+    :root {
+        --bg: #0d0d0d;
+        --panel-bg: #0b0b0b;
+        --border: #222222;
+        --border-soft: #1e1e1e;
+        --gold: #c99a3d;
+        --text-main: #ffffff;
+        --text-muted: #999999;
+        --green: #4caf50;
+    }
+
+    body {
+        background-color: var(--bg);
+        font-family: Arial, Helvetica, sans-serif;
+        padding: 40px;
+        color: var(--text-main);
+    }
+
+    .material-icons {
+        font-family: 'Material Icons';
+        line-height: 1;
+    }
+
+    /* ===== SECCIÓN 1: ENCABEZADO ===== */
+    .header-section {
+        margin-bottom: 30px;
+    }
+
+    .header-section h3 {
+        color: var(--gold);
+        font-family: "Oswald", sans-serif;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        font-size: 16px;
+    }
+
+    .header-section h1 {
+        font-family: 'Playfair Display', serif;
+        font-weight: bold;
+        margin: 5px 0 6px;
+        font-size: 30px;
+    }
+
+    .header-section p {
+        color: var(--text-muted);
+        font-size: 14px;
+    }
+
+    /* ===== SECCIÓN 2: GRID PRINCIPAL (columna izquierda + resumen) ===== */
+    .checkout-grid {
+        display: flex;
+        gap: 20px;
+        align-items: flex-start;
+    }
+
+    .checkout-main {
+        flex: 2;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        min-width: 0;
+    }
+
+    .checkout-sidebar {
+        flex: 1;
+        min-width: 280px;
+        position: sticky;
+        top: 20px;
+    }
+
+    .panel {
+        background-color: var(--panel-bg);
+        border: 1px solid var(--border);
+    }
+
+    .panel-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 18px 24px;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .panel-header .material-icons {
+        color: var(--gold);
+        font-size: 18px;
+    }
+
+    .panel-header h2 {
+        font-family: "Oswald", sans-serif;
+        font-size: 13px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--gold);
+    }
+
+    /* ----- Panel: Datos del cliente ----- */
+    .datos-cliente-body {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+        padding: 20px 24px;
+    }
+
+    .dato-item {
+        min-width: 160px;
+    }
+
+    .dato-label {
+        font-size: 13px;
+        color: var(--text-muted);
+        margin-bottom: 4px;
+    }
+
+    .dato-valor {
+        font-size: 15px;
+        font-weight: bold;
+        color: var(--text-main);
+    }
+
+    /* ----- Panel: Detalle del pedido ----- */
+    .pedido-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .pedido-table th {
+        text-align: left;
+        padding: 14px 24px;
+        font-size: 12px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .pedido-table td {
+        padding: 16px 24px;
+        vertical-align: middle;
+    }
+
+    .producto-cell {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .producto-icono {
+        width: 40px;
+        height: 40px;
+        background-color: var(--border-soft);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .producto-icono .material-icons {
+        color: var(--text-muted);
+        font-size: 18px;
+    }
+
+    .producto-nombre {
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    .producto-categoria {
+        font-size: 12px;
+        color: var(--text-muted);
+    }
+
+    .cantidad, .precio-unit {
+        color: var(--text-muted);
+        font-size: 14px;
+    }
+
+    .subtotal-producto {
+        color: var(--gold);
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    /* ----- Panel: Método de pago ----- */
+    .metodo-pago-body {
+        padding: 20px 24px;
+    }
+
+    .metodo-pago-card {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        border: 1px solid var(--border);
+        padding: 18px;
+        cursor: pointer;
+    }
+
+    .metodo-pago-card.seleccionado {
+        border-color: var(--gold);
+        background-color: rgba(201, 154, 61, 0.05);
+    }
+
+    .metodo-icono {
+        width: 44px;
+        height: 44px;
+        background-color: var(--border-soft);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .metodo-icono .material-icons {
+        color: var(--gold);
+        font-size: 20px;
+    }
+
+    .metodo-info {
+        flex: 1;
+    }
+
+    .metodo-nombre {
+        font-weight: bold;
+        font-size: 15px;
+        margin-bottom: 2px;
+    }
+
+    .metodo-desc {
+        font-size: 13px;
+        color: var(--text-muted);
+    }
+
+    .metodo-check {
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        border: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .metodo-check .material-icons {
+        font-size: 16px;
+        color: transparent;
+    }
+
+    .metodo-pago-card.seleccionado .metodo-check {
+        background-color: var(--gold);
+        border-color: var(--gold);
+    }
+
+    .metodo-pago-card.seleccionado .metodo-check .material-icons {
+        color: #1a1200;
+    }
+
+    .metodo-pago-nota {
+        font-size: 13px;
+        color: var(--text-muted);
+        padding: 16px 24px 20px;
+    }
+
+    /* ----- Sidebar: Resumen ----- */
+    .resumen-body {
+        padding: 20px 24px;
+    }
+
+    .resumen-linea {
+        display: flex;
+        justify-content: space-between;
+        font-size: 14px;
+        color: var(--text-muted);
+        margin-bottom: 14px;
+    }
+
+    .resumen-linea .valor {
+        color: var(--text-main);
+    }
+
+    .resumen-linea .valor.gratis {
+        color: var(--green);
+    }
+
+    .resumen-total {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        padding-top: 16px;
+        margin-top: 6px;
+        border-top: 1px solid var(--border);
+        margin-bottom: 20px;
+    }
+
+    .resumen-total .label {
+        font-weight: bold;
+        font-size: 14px;
+        text-transform: uppercase;
+    }
+
+    .resumen-total .valor {
+        font-family: 'Playfair Display', serif;
+        font-size: 26px;
+        font-weight: bold;
+        color: var(--gold);
+    }
+
+    .btn-confirmar {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background-color: #c9a13b;
+        color: #1a1200;
+        border: none;
+        padding: 15px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 13px;
+        font-weight: bold;
+        letter-spacing: 0.5px;
+        cursor: pointer;
+        margin-bottom: 12px;
+    }
+
+    .btn-confirmar:hover {
+        background-color: #d9b04f;
+    }
+
+    .btn-volver {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background: none;
+        border: 1px solid var(--border);
+        color: var(--text-muted);
+        padding: 14px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 13px;
+        font-weight: bold;
+        letter-spacing: 0.5px;
+        cursor: pointer;
+    }
+
+    .btn-volver:hover {
+        border-color: var(--gold);
+        color: var(--gold);
+    }
+
+    .btn-confirmar .material-icons,
+    .btn-volver .material-icons {
+        font-size: 16px;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+        .checkout-grid {
+        flex-direction: column;
+        }
+
+        .checkout-sidebar {
+        width: 100%;
+        position: static;
+        }
+    }
+
+    @media (max-width: 500px) {
+        .pedido-table {
+        display: block;
+        overflow-x: auto;
+        }
+    }

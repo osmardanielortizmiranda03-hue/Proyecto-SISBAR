@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SERVICIO - PANEL ADMINISTRADOR - SISBAR</title>
+
+    <!-- Material Icons & Materialize CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@100..900&family=Barlow+Condensed:wght@200&family=Karla:ital,wght@0,200..800;1,200..800&family=Oswald:wght@200&family=Playfair+Display+SC:wght@400..900&family=Space+Grotesk:wght@300&display=swap" rel="stylesheet">
+
+    <!-- CSS Personalizado -->
+    <link rel="stylesheet" href="/CSS/panel administrador/servicios.css">
+</head>
+<body>
+
+    <!-- LAYOUT PRINCIPAL -->
+    <div class="dashboard">
+
+        <!-- SIDEBAR IZQUIERDO -->
+        <aside class="sidebar" aria-label="Navegación principal">
+            <header class="sidebar-header">
+                <div class="fila-superior">
+                    <div class="icono" aria-hidden="true">
+                        <i class="material-icons">content_cut</i>
+                    </div>
+                    <h2 class="titulo-app">SISBAR</h2>
+                </div>
+                <p>Panel Administrativo</p>
+            </header>
+
+            <nav class="menu" aria-label="Menú lateral">
+                <ul>
+                    <li>
+                        <a href="/panel administrador/dashboard-administrador.html">
+                            <i class="material-icons">dashboard</i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="activo">
+                        <a href="/panel administrador/usuarios.html">
+                            <i class="material-icons">group</i>
+                            <span>Usuarios</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/panel administrador/servicios.html">
+                            <i class="material-icons">content_cut</i>
+                            <span>Servicios</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/panel administrador/citas.html">
+                            <i class="material-icons">event</i>
+                            <span>Citas</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/panel administrador/productos.html">
+                            <i class="material-icons">shopping_bag</i>
+                            <span>Productos</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/panel administrador/pagos.html">
+                            <i class="material-icons">attach_money</i>
+                            <span>Pagos</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/panel administrador/reportes.html">
+                            <i class="material-icons">bar_chart</i>
+                            <span>Reportes</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/panel administrador/configuracion.html">
+                            <i class="material-icons">settings</i>
+                            <span>Configuración</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Pagina de Inicio/index.html" class="cerrar-sesion">
+                            <i class="material-icons">logout</i>
+                            <span>Cerrar Sesión</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <!-- VISTA DEL FORMULARIO DE RESERVA -->
+            <!-- FONDO ANIMADO -->
+        <div class="contenido">
+
+            <!-- BARRA SUPERIOR (TOPBAR) -->
+            <header class="topbar">
+                <nav class="nav-wrapper">
+                    <a href="#" class="brand-logo">
+                        <img src="/IMAGES/logo-sisbar.png" alt="Logo SISBAR">
+                    </a>
+
+                    <a href="#" class="sidenav-trigger" data-target="mobile-menu" aria-label="Abrir menú móvil">
+                        <i class="material-icons">menu</i>
+                    </a>
+
+                    <div class="usuario">
+                        <div class="avatar-usuario" aria-hidden="true">C</div>
+                        <span>Carlos Ramírez</span>
+                    </div>
+                </nav>
+
+                <!-- MENÚ RESPONSIVE -->
+                <ul class="sidenav" id="mobile-menu">
+                    <li class="sidebar-header">
+                        <div class="fila-superior">
+                            <div class="icono"><i class="material-icons">content_cut</i></div>
+                            <h2>SISBAR</h2>
+                        </div>
+                        <p>Portal del Cliente</p>
+                    </li>
+                    <li class="sidebar-header">
+                        <div class="fila-superior">
+                            <div class="icono"><i class="material-icons">content_cut</i></div>
+                            <h2>SISBAR</h2>
+                        </div>
+                        <p>Portal del Cliente</p>
+                    </li>
+                    <li>
+                        <a href="/panel administrador/dashboard-administrador.html">
+                            <i class="material-icons">dashboard</i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="activo">
+                        <a href="/panel administrador/usuarios.html">
+                            <i class="material-icons">group</i>
+                            <span>Usuarios</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/panel administrador/servicios.html">
+                            <i class="material-icons">content_cut</i>
+                            <span>Servicios</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/panel administrador/citas.html">
+                            <i class="material-icons">event</i>
+                            <span>Citas</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/panel administrador/productos.html">
+                            <i class="material-icons">shopping_bag</i>
+                            <span>Productos</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/panel administrador/pagos.html">
+                            <i class="material-icons">attach_money</i>
+                            <span>Pagos</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/panel administrador/reportes.html">
+                            <i class="material-icons">bar_chart</i>
+                            <span>Reportes</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/panel administrador/configuracion.html">
+                            <i class="material-icons">settings</i>
+                            <span>Configuración</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Pagina de Inicio/index.html" class="cerrar-sesion">
+                            <i class="material-icons">logout</i>
+                            <span>Cerrar Sesión</span>
+                        </a>
+                    </li>
+                </ul>
+            </header>
+
+            <div class="stars-background">
+                <div id="stars"></div>
+                <div id="stars2"></div>
+                <div id="stars3"></div>
+                <main>
+                    <!-- SECCIÓN 1: ENCABEZADO -->
+                    <section class="header-section">
+                        <div class="header-title">
+                        <h3>Catálogo</h3>
+                        <h1>Gestión de Servicios</h1>
+                        </div>
+                        <button class="btn-nuevo modal-trigger" data-target="modalNuevoServicio">
+                        <i class="material-icons">add</i>
+                        NUEVO SERVICIO
+                        </button>
+                    </section>
+                    
+                    <!-- SECCIÓN 2: GRID DE SERVICIOS -->
+                    <section class="services-section">
+                    
+                        <div class="service-card">
+                        <div class="service-top">
+                            <span class="service-name">Corte Clásico</span>
+                            <div class="service-actions">
+                            <button class="icon-btn editar"><i class="material-icons">edit</i></button>
+                            <button class="icon-btn eliminar"><i class="material-icons">delete</i></button>
+                            </div>
+                        </div>
+                        <p class="service-desc">Corte tradicional con tijera y navaja, acabado perfecto.</p>
+                        <div class="service-footer">
+                            <span class="service-duration">45 min</span>
+                            <span class="service-price">$150</span>
+                        </div>
+                        </div>
+                    
+                        <div class="service-card">
+                        <div class="service-top">
+                            <span class="service-name">Corte Premium</span>
+                            <div class="service-actions">
+                            <button class="icon-btn editar"><i class="material-icons">edit</i></button>
+                            <button class="icon-btn eliminar"><i class="material-icons">delete</i></button>
+                            </div>
+                        </div>
+                        <p class="service-desc">Diseño personalizado con productos de primera línea.</p>
+                        <div class="service-footer">
+                            <span class="service-duration">60 min</span>
+                            <span class="service-price ">$280</span>
+                        </div>
+                        </div>
+                    
+                        <div class="service-card">
+                        <div class="service-top">
+                            <span class="service-name">Arreglo de Barba</span>
+                            <div class="service-actions">
+                            <button class="icon-btn editar"><i class="material-icons">edit</i></button>
+                            <button class="icon-btn eliminar"><i class="material-icons">delete</i></button>
+                            </div>
+                        </div>
+                        <p class="service-desc">Perfilado, afeitado con toalla caliente y aceites.</p>
+                        <div class="service-footer">
+                            <span class="service-duration">30 min</span>
+                            <span class="service-price">$120</span>
+                        </div>
+                        </div>
+                    
+                        <div class="service-card">
+                        <div class="service-top">
+                            <span class="service-name">Tratamiento Capilar</span>
+                            <div class="service-actions">
+                            <button class="icon-btn editar"><i class="material-icons">edit</i></button>
+                            <button class="icon-btn eliminar"><i class="material-icons">delete</i></button>
+                            </div>
+                        </div>
+                        <p class="service-desc">Hidratación profunda y cuidado especializado.</p>
+                        <div class="service-footer">
+                            <span class="service-duration">50 min</span>
+                            <span class="service-price">$200</span>
+                        </div>
+                        </div>
+                    </section>
+                    
+                    <!-- MODAL: NUEVO SERVICIO -->
+                    <div id="modalNuevoServicio" class="modal">
+                        <div class="modal-content">
+                        <h4>Nuevo Servicio</h4>
+                    
+                        <div class="row">
+                            <div class="input-field col s12">
+                            <input id="nombreServicio" type="text">
+                            <label for="nombreServicio">Nombre del servicio</label>
+                            </div>
+                    
+                            <div class="input-field col s12">
+                            <textarea id="descServicio" class="materialize-textarea"></textarea>
+                            <label for="descServicio">Descripción</label>
+                            </div>
+                    
+                            <div class="input-field col s6">
+                            <input id="duracionServicio" type="number" min="0">
+                            <label for="duracionServicio">Duración (min)</label>
+                            </div>
+                    
+                            <div class="input-field col s6">
+                            <input id="precioServicio" type="number" min="0">
+                            <label for="precioServicio">Precio ($)</label>
+                            </div>
+                        </div>
+                        </div>
+                    
+                        <div class="modal-footer">
+                        <button class="modal-close btn-cancelar">Cancelar</button>
+                        <button class="modal-close btn-guardar">Guardar</button>
+                        </div>
+                    </div>
+                </main>
+            </div>
+    </div>
+    </div> <!-- Cierre correcto del fondo animado -->
+
+    <!-- Materialize JS (necesario para que funcione el modal) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        
+        document.addEventListener("DOMContentLoaded", () => {
+            M.AutoInit();
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+        M.Modal.init(document.querySelectorAll('.modal'));
+        M.FormSelect.init(document.querySelectorAll('select'));
+        });
+    </script>
+    
+</body>
+</html>
