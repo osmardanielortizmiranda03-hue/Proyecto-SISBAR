@@ -200,9 +200,10 @@
                         <h3>Sistema</h3>
                         <h1>Gestión de Usuarios</h1>
                         </div>
+
                         <button class="btn-nuevo modal-trigger" data-target="modalNuevoUsuario">
-                        <i class="material-icons">add</i>
-                        NUEVO USUARIO
+                            <i class="material-icons">add</i>
+                            NUEVO USUARIO
                         </button>
                     </section>
                     
@@ -219,7 +220,7 @@
                             <th></th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="tbody">
                             <tr>
                             <td>
                                 <div class="usuario-cell">
@@ -233,7 +234,7 @@
                             <td class="desde">2025-03-10</td>
                             <td>
                                 <div class="acciones">
-                                <button class="icon-btn editar"><i class="material-icons">edit</i></button>
+                                <button class="icon-btn editar" data-target="modalCambiarUsuario"><i class="material-icons">edit</i></button>
                                 <button class="icon-btn eliminar"><i class="material-icons">delete</i></button>
                                 </div>
                             </td>
@@ -251,7 +252,7 @@
                             <td class="desde">2024-01-01</td>
                             <td>
                                 <div class="acciones">
-                                <button class="icon-btn editar"><i class="material-icons">edit</i></button>
+                                <button class="icon-btn editar" data-target="modalCambiarUsuario"><i class="material-icons">edit</i></button>
                                 <button class="icon-btn eliminar"><i class="material-icons">delete</i></button>
                                 </div>
                             </td>
@@ -269,7 +270,7 @@
                             <td class="desde">2024-01-01</td>
                             <td>
                                 <div class="acciones">
-                                <button class="icon-btn editar"><i class="material-icons">edit</i></button>
+                                <button class="icon-btn editar" data-target="modalCambiarUsuario"><i class="material-icons">edit</i></button>
                                 <button class="icon-btn eliminar"><i class="material-icons">delete</i></button>
                                 </div>
                             </td>
@@ -285,17 +286,55 @@
                     
                         <div class="row">
                             <div class="input-field col s12">
-                            <input id="nombreUsuario" type="text">
+                            <input id="nombreUsuario" value="" type="text">
                             <label for="nombreUsuario">Nombre completo</label>
                             </div>
                     
                             <div class="input-field col s12">
-                            <input id="correoUsuario" type="email">
+                            <input id="correoUsuario" value="" type="email">
                             <label for="correoUsuario">Correo</label>
                             </div>
                     
                             <div class="input-field col s12">
-                            <input id="telefonoUsuario" type="text">
+                            <input id="telefonoUsuario" value="" type="text">
+                            <label for="telefonoUsuario">Teléfono</label>
+                            </div>
+                    
+                            <div class="input-field col s12">
+                            <select id="rolUsuario">
+                                <option value="" disabled selected>Elige un rol</option>
+                                <option value="cliente">Cliente</option>
+                                <option value="barbero">Barbero</option>
+                                <option value="administrador">Administrador</option>
+                            </select>
+                            </div>
+                        </div>
+                        </div>
+                    
+                        <div class="modal-footer">
+                        <button class="modal-close btn-cancelar">Cancelar</button>
+                        <button class="modal-close btn-guardar">Guardar</button>
+                        </div>
+                    </div>
+
+                    <!-- MODAL: MODIFICAR O CAMBIAR USUARIO -->
+                    <div id="modalCambiarUsuario" class="modal">
+                        <div class="modal-content">
+                        <h4>Nuevo Usuario</h4>
+                    
+                        <div class="row">
+                            <div class="input-field col s12">
+                            <input id="nombreUsuario" value="" type="text">
+                            <label for="nombreUsuario">Nombre completo</label>
+                            </div>
+                    
+                            <div class="input-field col s12">
+                            <input id="correoUsuario" value="" type="email">
+                            <label for="correoUsuario">Correo</label>
+                            </div>
+                    
+                            <div class="input-field col s12">
+                            <input id="telefonoUsuario" value="" type="text">
                             <label for="telefonoUsuario">Teléfono</label>
                             </div>
                     
@@ -323,15 +362,7 @@
 
     <!-- Materialize JS (necesario para que funcione el modal) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            M.AutoInit();
-        });
-
-        document.addEventListener('DOMContentLoaded', () => {
-        M.Modal.init(document.querySelectorAll('.modal'));
-        M.FormSelect.init(document.querySelectorAll('select'));
-        });
+    <script src="/JS/panelAdministrativo/usuario.js">
     </script>
     
 </body>

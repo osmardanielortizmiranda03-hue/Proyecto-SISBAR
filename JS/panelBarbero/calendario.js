@@ -215,10 +215,7 @@ function generarCalendario() {
         newDay.addEventListener("click", () => {
 
             // Quitar "activo" de todos los días
-            const dias =
-                document.querySelectorAll(
-                    ".day-cell"
-                );
+            const dias =document.querySelectorAll(".day-cell");
 
             dias.forEach(dia => {
                 dia.classList.remove("activo");
