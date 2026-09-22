@@ -234,7 +234,7 @@
                             <td class="desde">2025-03-10</td>
                             <td>
                                 <div class="acciones">
-                                <button class="icon-btn editar" data-target="modalCambiarUsuario"><i class="material-icons">edit</i></button>
+                                <button class="icon-btn editar modal-trigger" data-target="modalCambiarUsuario"><i class="material-icons">edit</i></button>
                                 <button class="icon-btn eliminar"><i class="material-icons">delete</i></button>
                                 </div>
                             </td>
@@ -252,7 +252,7 @@
                             <td class="desde">2024-01-01</td>
                             <td>
                                 <div class="acciones">
-                                <button class="icon-btn editar" data-target="modalCambiarUsuario"><i class="material-icons">edit</i></button>
+                                <button class="icon-btn editar modal-trigger" data-target="modalCambiarUsuario"><i class="material-icons">edit</i></button>
                                 <button class="icon-btn eliminar"><i class="material-icons">delete</i></button>
                                 </div>
                             </td>
@@ -270,7 +270,7 @@
                             <td class="desde">2024-01-01</td>
                             <td>
                                 <div class="acciones">
-                                <button class="icon-btn editar" data-target="modalCambiarUsuario"><i class="material-icons">edit</i></button>
+                                <button class="icon-btn editar modal-trigger" data-target="modalCambiarUsuario"><i class="material-icons">edit</i></button>
                                 <button class="icon-btn eliminar"><i class="material-icons">delete</i></button>
                                 </div>
                             </td>
@@ -324,34 +324,34 @@
                     
                         <div class="row">
                             <div class="input-field col s12">
-                            <input id="nombreUsuario" value="" type="text">
+                            <input id="nombreUsuarioModificar" value="" type="text">
                             <label for="nombreUsuario">Nombre completo</label>
                         </div>
                     
                         <div class="input-field col s12">
-                            <input id="correoUsuario" value="" type="email">
+                            <input id="correoUsuarioModificar" value="" type="email">
                             <label for="correoUsuario">Correo</label>
                         </div>
                     
                         <div class="input-field col s12">
-                            <input id="telefonoUsuario" value="" type="text">
+                            <input id="telefonoUsuarioModificar" value="" type="text">
                             <label for="telefonoUsuario">Teléfono</label>
                         </div>
                     
                         <div class="input-field col s12">
-                            <select id="rolUsuario">
+                            <select id="rolUsuarioModificar">
                                 <option value="" disabled selected>Elige un rol</option>
                                 <option value="cliente">Cliente</option>
                                 <option value="barbero">Barbero</option>
                                 <option value="administrador">Administrador</option>
                             </select>
-                            </div>
+                        </div>
                         </div>
                         </div>
                     
                         <div class="modal-footer">
                         <button class="modal-close btn-cancelar">Cancelar</button>
-                        <button class="modal-close btn-guardar">Guardar</button>
+                        <button class="modal-close btn-guardar modalModificar">Guardar</button>
                         </div>
                     </div>
 
