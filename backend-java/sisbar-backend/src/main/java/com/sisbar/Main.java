@@ -31,8 +31,8 @@ public class Main {
         }
 
         // 4. ELIMINAR un servicio por id (cambia el número por uno real que exista)
-            System.out.println("\n--- Eliminando servicio ---");
-            servicioDAO.eliminar(1);
+        // System.out.println("\n--- Eliminando servicio ---");
+        // servicioDAO.eliminar(1);
 
         // 5. CONSULTAR de nuevo para ver los cambios
         System.out.println("\n--- Listado final de servicios ---");
