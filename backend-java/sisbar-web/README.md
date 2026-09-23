@@ -107,7 +107,7 @@ Se usa **GET** para consultar y **POST** para todo lo que modifica datos. Despu�
 
 ## 5. Cómo ejecutar
 
-1. **Base de datos:** ejecutar `sql/sisbar.sql` en MySQL Workbench (crea la BD `sisbar`, las tablas `servicio` y `usuario`, un administrador y 4 servicios de ejemplo).
+1. **Base de datos:** ejecutar `sql/sisbar.sql` en MySQL Workbench. Usa las tablas `servicio` y `usuario` de la base de datos `sisbar` (las crea si no existen), agrega a `usuario` la columna `rol` si no la tiene, y crea un administrador y 4 servicios de ejemplo. No borra datos existentes.
 2. **Conexión:** revisar usuario y contraseña de MySQL en `src/main/resources/db.properties`.
 3. **Compilar y probar:**
    ```bash

@@ -52,6 +52,9 @@ public class RegistroServlet extends HttpServlet {
         if (Validaciones.estaVacio(nombres) || Validaciones.estaVacio(apellidos)) {
             errores.add("Los nombres y apellidos son obligatorios.");
         }
+        if ((nombres != null && nombres.trim().length() > 45) || (apellidos != null && apellidos.trim().length() > 100)) {
+            errores.add("El nombre admite máximo 45 caracteres y el apellido máximo 100.");
+        }
         if (!Validaciones.esNumeroDocumentoValido(numeroIdentidad)) {
             errores.add("El número de identidad debe tener solo números (6 a 15 dígitos).");
         }

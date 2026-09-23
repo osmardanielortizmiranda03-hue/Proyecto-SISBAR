@@ -16,28 +16,41 @@ CREATE TABLE IF NOT EXISTS servicio (
     duracion_servicio TIME           NOT NULL
 );
 
--- Tabla de usuarios (registro e inicio de sesión)
+-- Tabla de usuarios (misma estructura que ya existe en la base de datos sisbar)
 CREATE TABLE IF NOT EXISTS usuario (
-    idusuario         INT AUTO_INCREMENT PRIMARY KEY,
-    nombres           VARCHAR(80)  NOT NULL,
-    apellidos         VARCHAR(80)  NOT NULL,
-    numero_identidad  VARCHAR(20)  NOT NULL UNIQUE,
-    celular           VARCHAR(20)  NOT NULL,
-    email             VARCHAR(120) NOT NULL UNIQUE,
-    fecha_nacimiento  DATE         NOT NULL,
-    nacionalidad      VARCHAR(60),
-    password_hash     CHAR(64)     NOT NULL,           -- SHA-256 en hexadecimal
-    rol               VARCHAR(20)  NOT NULL DEFAULT 'CLIENTE',  -- CLIENTE | BARBERO | ADMIN
-    fecha_registro    TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP
+    idUSUARIO           INT AUTO_INCREMENT PRIMARY KEY,
+    nombre              VARCHAR(45),
+    apellido            VARCHAR(100),
+    correo_usuario      VARCHAR(100),
+    telefono_usuario    VARCHAR(20),
+    fecha_de_nacimiento DATE,
+    n_identidad         VARCHAR(45),
+    nacionalidad        VARCHAR(45),
+    fecha_registro      DATE,
+    `contraseña`        VARCHAR(250)
 );
 
--- Usuario administrador de prueba
+-- Se agrega la columna "rol" (CLIENTE | BARBERO | ADMIN) solo si todavía no existe.
+-- No borra ni cambia ningún dato que ya tengas en la tabla.
+SET @existe_rol := (SELECT COUNT(*) FROM information_schema.COLUMNS
+                    WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'usuario' AND COLUMN_NAME = 'rol');
+SET @sql_rol := IF(@existe_rol = 0,
+                   'ALTER TABLE usuario ADD COLUMN rol VARCHAR(20) NOT NULL DEFAULT ''CLIENTE''',
+                   'SELECT ''La columna rol ya existe'' AS mensaje');
+PREPARE sentencia FROM @sql_rol;
+EXECUTE sentencia;
+DEALLOCATE PREPARE sentencia;
+
+-- Usuario administrador de prueba (solo se crea si no existe)
 --   correo:     admin@sisbar.com
---   contraseña: Admin12345
-INSERT IGNORE INTO usuario (nombres, apellidos, numero_identidad, celular, email, fecha_nacimiento,
-                            nacionalidad, password_hash, rol)
-VALUES ('Administrador', 'SISBAR', '1000000000', '3000000000', 'admin@sisbar.com', '2000-01-01',
-        'Colombiana', '8122cba12b897aa5546baf90b6c82c9f646f976b3555033cbc5e0b72d4f7a5bc', 'ADMIN');
+--   contraseña: Admin12345   (se guarda cifrada con SHA-256)
+INSERT INTO usuario (nombre, apellido, correo_usuario, telefono_usuario, fecha_de_nacimiento,
+                     n_identidad, nacionalidad, fecha_registro, `contraseña`, rol)
+SELECT 'Administrador', 'SISBAR', 'admin@sisbar.com', '3000000000', '2000-01-01',
+       '1000000000', 'Colombiana', CURDATE(),
+       '8122cba12b897aa5546baf90b6c82c9f646f976b3555033cbc5e0b72d4f7a5bc', 'ADMIN'
+FROM DUAL
+WHERE NOT EXISTS (SELECT 1 FROM usuario WHERE correo_usuario = 'admin@sisbar.com');
 
 -- Servicios de ejemplo (solo si la tabla está vacía)
 INSERT INTO servicio (nombre_servicio, precio_servicio, duracion_servicio)

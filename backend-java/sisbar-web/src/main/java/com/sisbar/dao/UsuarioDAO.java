@@ -10,13 +10,16 @@ import java.sql.SQLException;
 
 /**
  * DAO de la tabla "usuario": registro de clientes e inicio de sesión.
+ * Usa las columnas de la tabla usuario de la base de datos sisbar
+ * (nombre, apellido, correo_usuario, telefono_usuario, n_identidad, contraseña...).
  */
 public class UsuarioDAO {
 
     /** Registra un usuario nuevo. El passwordHash ya debe venir cifrado. */
     public boolean registrar(Usuario u) throws SQLException {
-        String sql = "INSERT INTO usuario (nombres, apellidos, numero_identidad, celular, email, "
-                + "fecha_nacimiento, nacionalidad, password_hash, rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO usuario (nombre, apellido, n_identidad, telefono_usuario, correo_usuario, "
+                + "fecha_de_nacimiento, nacionalidad, `contraseña`, rol, fecha_registro) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, CURDATE())";
         try (Connection con = ConexionBD.conectar();
              PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, u.getNombres());
@@ -34,7 +37,7 @@ public class UsuarioDAO {
 
     /** true si ya hay un usuario con ese correo o ese número de identidad */
     public boolean existe(String email, String numeroIdentidad) throws SQLException {
-        String sql = "SELECT COUNT(*) FROM usuario WHERE email = ? OR numero_identidad = ?";
+        String sql = "SELECT COUNT(*) FROM usuario WHERE correo_usuario = ? OR n_identidad = ?";
         try (Connection con = ConexionBD.conectar();
              PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, email);
@@ -47,7 +50,7 @@ public class UsuarioDAO {
 
     /** Busca un usuario por correo (para el login). Devuelve null si no existe. */
     public Usuario buscarPorEmail(String email) throws SQLException {
-        String sql = "SELECT * FROM usuario WHERE email = ?";
+        String sql = "SELECT * FROM usuario WHERE correo_usuario = ?";
         try (Connection con = ConexionBD.conectar();
              PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, email);
@@ -56,15 +59,15 @@ public class UsuarioDAO {
                     return null;
                 }
                 Usuario u = new Usuario();
-                u.setIdUsuario(rs.getInt("idusuario"));
-                u.setNombres(rs.getString("nombres"));
-                u.setApellidos(rs.getString("apellidos"));
-                u.setNumeroIdentidad(rs.getString("numero_identidad"));
-                u.setCelular(rs.getString("celular"));
-                u.setEmail(rs.getString("email"));
-                u.setFechaNacimiento(rs.getString("fecha_nacimiento"));
+                u.setIdUsuario(rs.getInt("idUSUARIO"));
+                u.setNombres(rs.getString("nombre"));
+                u.setApellidos(rs.getString("apellido"));
+                u.setNumeroIdentidad(rs.getString("n_identidad"));
+                u.setCelular(rs.getString("telefono_usuario"));
+                u.setEmail(rs.getString("correo_usuario"));
+                u.setFechaNacimiento(rs.getString("fecha_de_nacimiento"));
                 u.setNacionalidad(rs.getString("nacionalidad"));
-                u.setPasswordHash(rs.getString("password_hash"));
+                u.setPasswordHash(rs.getString("contraseña"));
                 u.setRol(rs.getString("rol"));
                 return u;
             }
