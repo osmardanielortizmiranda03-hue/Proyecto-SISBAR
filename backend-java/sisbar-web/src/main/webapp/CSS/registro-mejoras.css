@@ -1,0 +1,44 @@
+/*==================================================
+=   MEJORAS VISUALES DEL REGISTRO                  =
+=   Se cargan DESPUÉS de regristro.css: no cambian =
+=   el diseño original, solo suman animaciones.    =
+==================================================*/
+
+/* La tarjeta aparece suavemente */
+.contenedor-login { animation: aparecer 0.6s ease-out both; }
+@keyframes aparecer {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Logo con brillo dorado */
+.logo-sisbar img { transition: transform 0.4s ease, box-shadow 0.4s ease; }
+.logo-sisbar img:hover {
+    transform: scale(1.05) rotate(-3deg);
+    box-shadow: 0 0 30px rgba(201, 168, 76, 0.45);
+}
+
+/* Campos con brillo dorado al escribir */
+.login-form input { transition: box-shadow 0.3s ease; }
+.login-form input:focus {
+    box-shadow: 0 0 0 2px #c9a84c, 0 0 20px rgba(201, 168, 76, 0.25) !important;
+}
+
+/* Ojo de contraseña clickeable */
+.unsee-icon { cursor: pointer; transition: color 0.3s ease; }
+.unsee-icon:hover { color: #c9a84c !important; }
+
+/* Botón con brillo que lo recorre */
+.btn-registrar { position: relative; overflow: hidden; }
+.btn-registrar::before {
+    content: "";
+    position: absolute; top: 0; left: -75%;
+    width: 50%; height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+    transform: skewX(-20deg);
+}
+.btn-registrar:hover::before { animation: brillo 0.8s ease; }
+@keyframes brillo { to { left: 125%; } }
+
+/* Mensajes con animación */
+.alerta { animation: aparecer 0.4s ease-out both; }

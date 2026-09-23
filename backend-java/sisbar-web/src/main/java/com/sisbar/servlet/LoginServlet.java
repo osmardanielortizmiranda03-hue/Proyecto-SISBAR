@@ -51,6 +51,18 @@ public class LoginServlet extends HttpServlet {
                 return;
             }
 
+            // El perfil elegido en las tarjetas (Usuario, Barbero, Administrador)
+            // debe coincidir con el rol guardado en la base de datos
+            String perfil = request.getParameter("perfil");
+            String rolEsperado = "USUARIO".equals(perfil) ? "CLIENTE" : perfil;
+            if (rolEsperado != null && !rolEsperado.equals(usuario.getRol())) {
+                String nombrePerfil = "ADMIN".equals(perfil) ? "Administrador"
+                        : "BARBERO".equals(perfil) ? "Barbero" : "Usuario";
+                mostrarError(request, response,
+                        "Esta cuenta no tiene el perfil de " + nombrePerfil + ". Selecciona el perfil correcto.");
+                return;
+            }
+
             // Evitamos guardar el hash en la sesión
             usuario.setPasswordHash(null);
 

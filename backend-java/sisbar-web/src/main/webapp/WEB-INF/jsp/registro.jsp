@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="${ctx}/CSS/pagina%20de%20inicio/regristro.css">
     <link rel="stylesheet" href="${ctx}/CSS/mensajes.css">
+    <link rel="stylesheet" href="${ctx}/CSS/registro-mejoras.css">
 </head>
 <body>
 

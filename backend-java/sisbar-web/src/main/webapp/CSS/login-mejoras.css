@@ -1,0 +1,131 @@
+/*==================================================
+=   MEJORAS VISUALES DEL LOGIN                     =
+=   Se cargan DESPUÉS de iniciar-sesion.css:       =
+=   no cambian el diseño original, solo le suman   =
+=   animaciones y estados.                         =
+==================================================*/
+
+/* 1. La tarjeta aparece suavemente al cargar */
+.contenedor-login {
+    animation: aparecer 0.6s ease-out both;
+}
+
+@keyframes aparecer {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* 2. El logo tiene un brillo dorado suave */
+.logo-sisbar img {
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.logo-sisbar img:hover {
+    transform: scale(1.05) rotate(-3deg);
+    box-shadow: 0 0 30px rgba(201, 168, 76, 0.45);
+}
+
+/* 3. Tarjetas de perfil: se elevan al pasar el mouse */
+.login-general button {
+    position: relative;
+    border: 2px solid transparent;
+}
+.login-general button:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(201, 168, 76, 0.25);
+}
+
+/* 4. El perfil elegido QUEDA marcado (antes se perdía al hacer clic en otro campo) */
+.login-general button.seleccionado {
+    border: 2px solid var(--gold);
+    background: linear-gradient(180deg, rgba(201, 168, 76, 0.12), rgba(201, 168, 76, 0.02));
+    box-shadow: 0 0 22px rgba(201, 168, 76, 0.35);
+}
+.login-general button.seleccionado h3,
+.login-general button.seleccionado i {
+    color: var(--gold);
+    font-weight: 600;
+}
+.login-general button.seleccionado::after {
+    content: "check_circle";
+    font-family: "Material Icons";
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    font-size: 16px;
+    color: var(--gold);
+}
+
+/* 5. Campos con brillo dorado al escribir */
+.login-form input[type="email"],
+.login-form input[type="password"],
+.login-form input[type="text"] {
+    transition: box-shadow 0.3s ease;
+}
+.login-form input:focus {
+    box-shadow: 0 0 0 2px var(--gold), 0 0 20px rgba(201, 168, 76, 0.25) !important;
+}
+/* Cuando se muestra la contraseña, el campo mantiene el mismo estilo */
+.login-form input[type="text"]#password {
+    height: 50px;
+    padding: 0 45px 0 15px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 0 20px #ffffff26;
+    background-color: var(--input-bg);
+    color: var(--white);
+    margin: 0;
+}
+
+/* 6. Ojo de la contraseña clickeable */
+.ver-password {
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+.ver-password:hover {
+    color: var(--gold) !important;
+}
+
+/* 7. Botón de ingresar con brillo que recorre el botón */
+.btn-login {
+    position: relative;
+    overflow: hidden;
+}
+.btn-login::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+    transform: skewX(-20deg);
+}
+.btn-login:hover::before {
+    animation: brillo 0.8s ease;
+}
+@keyframes brillo {
+    to { left: 125%; }
+}
+.btn-login.cargando {
+    opacity: 0.8;
+    pointer-events: none;
+}
+
+/* 8. Mensajes de error / éxito dentro de la tarjeta */
+.mensajes-login {
+    width: 100%;
+}
+.mensajes-login .alerta {
+    animation: aparecer 0.4s ease-out both;
+}
+
+/* 9. En celular las tarjetas de perfil se ven completas */
+@media (max-width: 600px) {
+    .login-general {
+        flex-direction: column;
+    }
+    .login-general button {
+        height: auto;
+        padding: 14px;
+    }
+}
