@@ -17,7 +17,7 @@ public class ServicioDAO {
         String sql = "INSERT INTO servicio (nombre_servicio, precio_servicio, duracion_servicio) VALUES (?, ?, ?)";
 
         try (Connection con = ConexionBD.conectar();
-             PreparedStatement ps = con.prepareStatement(sql)) {
+            PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setString(1, servicio.getNombreServicio());
             ps.setDouble(2, servicio.getPrecioServicio());
@@ -37,8 +37,8 @@ public class ServicioDAO {
         String sql = "SELECT * FROM servicio";
 
         try (Connection con = ConexionBD.conectar();
-             PreparedStatement ps = con.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
                 Servicio servicio = new Servicio(
