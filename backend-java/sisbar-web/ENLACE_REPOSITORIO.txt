@@ -1,0 +1,9 @@
+Evidencia GA7-220501096-AA2-EV02 - Módulos de software codificados y probados
+Aprendiz: Osmar Daniel Ortiz Miranda
+Proyecto: SISBAR - Sistema web para barbería
+
+Enlace del repositorio (GitHub):
+https://github.com/osmardanielortizmiranda03-hue/Proyecto-SISBAR
+
+Módulo web (Servlets + JSP) dentro del repositorio:
+https://github.com/osmardanielortizmiranda03-hue/Proyecto-SISBAR/tree/master/backend-java/sisbar-web

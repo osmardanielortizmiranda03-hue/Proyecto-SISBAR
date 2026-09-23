@@ -1,0 +1,14 @@
+<%-- Fragmento reutilizable: se incorpora con la directiva <%@ include file="..." %>
+     Muestra la lista de errores de validación y el mensaje de error general. --%>
+<c:if test="${not empty errores}">
+    <div class="alerta alerta-error">
+        <ul>
+            <c:forEach var="e" items="${errores}">
+                <li><c:out value="${e}"/></li>
+            </c:forEach>
+        </ul>
+    </div>
+</c:if>
+<c:if test="${not empty error}">
+    <div class="alerta alerta-error"><c:out value="${error}"/></div>
+</c:if>

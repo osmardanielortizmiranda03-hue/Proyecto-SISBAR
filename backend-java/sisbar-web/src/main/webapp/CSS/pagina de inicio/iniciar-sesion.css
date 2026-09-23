@@ -1,0 +1,340 @@
+/*==================================================
+=                  VARIABLES (UI)                  =
+==================================================*/
+:root {
+    --gold: #c9a84c;
+    --gold-black: #877238;
+    --white: #eeeeee;
+    --black: #0a0a0a;
+    --gray: #2e2c2b;
+    --dark-bg: #202020;
+    --input-bg: #111;
+}
+
+/* Reset Estándar */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--black);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+/*==================================================
+=               CONTENEDOR TARJETA                 =
+==================================================*/
+.contenedor-login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    width: 40%;
+    max-width: 700px;
+    background-color: var(--dark-bg);
+    padding: 40px 40px 10px 40px;
+    border-top: 5px solid var(--gold-black);
+    border-bottom: 5px solid var(--gold-black);
+    box-shadow: 0 0 25px #ffffff26;
+    border-radius: 8px; /* Cambiado de 1% a px para mejor renderizado */
+}
+
+/* Enlace Superior Volver */
+.regresar-inicio {
+    align-self: flex-start;
+    margin-bottom: 30px;
+}
+
+.contenedor-login a {
+    color: white;
+    display: inline-block;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.contenedor-login a:hover {
+    color: var(--gold);
+}
+
+/*==================================================
+=                  SECCIÓN LOGO                    =
+==================================================*/
+.logo-sisbar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.logo-sisbar img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    box-shadow: 0 0 20px #ffffff33;
+    margin-bottom: 12px;
+}
+
+.logo-sisbar h2 {
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+    font-size: 30px;
+    margin: 10px 0 0 0;
+    color: var(--gold);
+    width: 100%;
+}
+
+.logo-sisbar span {
+    display: block;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    color: #ffffffa8;
+}
+
+.logo-sisbar .h2-bienvenido {
+    margin-bottom: 4px;
+}
+
+.logo-sisbar p {
+    color: var(--white);
+    font-family: "Oswald", sans-serif;
+    font-weight: 200;
+}
+
+/*==================================================
+=          SECCIÓN SELECCIÓN DE PERFIL             =
+==================================================*/
+.login-general {
+    display: flex;
+    width: 100%;
+    margin: 30px 0;
+    gap: 10px;
+}
+
+.login-perfil {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.login-general button {
+    background-color: transparent;
+    padding: 10px;
+    width: 100%;
+    height: 110px;
+    border: none;
+    box-shadow: 0 0 20px #ffffff26;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.login-general h3 {
+    font-size: 18px;
+    color: white;
+    margin: 5px 0 0 0;
+}
+
+.login-general p {
+    color: #ffffffa8;
+    margin: 5px 0 0 0;
+    text-align: center;
+    font-size: 10px;
+    font-family: "Oswald", sans-serif;
+    font-weight: 200;
+}
+
+.login-general button i {
+    color: white;
+    font-size: 28px;
+    transition: color 0.3s ease;
+}
+
+/* Estados Focus/Active de los Perfiles */
+.login-general button:focus {
+    border: 2px solid var(--gold);
+    outline: none;
+}
+
+.login-general button:focus h3,
+.login-general button:focus i {
+    color: var(--gold);
+    font-weight: 600;
+}
+
+/*==================================================
+=             FORMULARIO DE LOGEO                  =
+==================================================*/
+.login-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    text-transform: uppercase;
+}
+
+.input-container {
+    width: 100%;
+    margin: 10px 0;
+    position: relative;
+}
+
+/* Iconos internos de los inputs */
+.input-container .field-icon {
+    position: absolute;
+    top: 42px;
+    right: 20px;
+    color: #ffffffa8;
+}
+
+.login-form input[type="email"],
+.login-form input[type="password"] {
+    height: 50px;
+    padding: 0 45px 0 15px; /* Espacio extra a la derecha para no encimar el icono */
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 0 20px #ffffff26;
+    background-color: var(--input-bg);
+    color: var(--white);
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 10px;
+}
+
+.login-form label {
+    font-size: 12px;
+    color: #ffffffa8;
+}
+
+/* Control de focos en Materialize */
+input[type=email]:not(.browser-default):focus:not([readonly]), 
+input[type=password]:not(.browser-default):focus:not([readonly]) {
+    border-bottom: 1px solid var(--gold) !important;
+    box-shadow: 0 1px 0 0 var(--gold) !important;
+}
+
+/* Checkbox y Olvido de password */
+.enlaces-checkbox {
+    margin: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.contraseña-forget a {
+    font-size: 13px;
+    text-transform: none; /* Mantiene la pregunta en formato legible */
+}
+
+[type="checkbox"]+span:not(.lever) {
+    padding-left: 25px;
+    font-size: 13px;
+    color: #ffffffa8;
+}
+
+/* Botón Iniciar Sesión */
+.iniciar-sesion {
+    margin: 15px 0;
+    width: 100%;
+}
+
+.btn-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    background-color: var(--gold) !important;
+    color: var(--black) !important;
+    font-weight: bold;
+    border: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+
+.btn-login i {
+    color: var(--black) !important;
+}
+
+.btn-login:hover {
+    background-color: var(--gold-black) !important;
+    color: var(--white) !important;
+}
+
+.btn-login:hover i {
+    color: var(--white) !important;
+}
+
+/* Enlace de Registro Inferior */
+.iniciar-sesion-link {
+    text-align: center;
+    margin: 20px 0;
+    text-transform: none;
+    color: #ffffffa8;
+}
+
+/*==================================================
+=            MEDIA QUERIES (RESPONSIVE)            =
+==================================================*/
+
+/* Laptops y Pantallas Medianas (1200px - 1000px) */
+@media screen and (max-width: 1200px) {
+    .contenedor-login {
+        width: 60%;
+    }
+}
+
+/* Tabletas en vertical (900px) */
+@media screen and (max-width: 900px) {
+    .contenedor-login {
+        width: 75%;
+    }
+    .logo-sisbar h2,
+    .logo-sisbar .h2-bienvenido {
+        font-size: 28px;
+    }
+}
+
+/* Celulares Grandes y Medianos (600px) */
+@media screen and (max-width: 600px) {
+    .contenedor-login {
+        width: 90%;
+        padding: 30px 20px;
+    }
+    
+    /* Cambia la selección de perfiles de fila a columna */
+    .login-general {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .login-general button {
+        height: 90px;
+    }
+
+    .logo-sisbar span,
+    .logo-sisbar .h2-bienvenido {
+        font-size: 23px;
+    }
+
+    .enlaces-checkbox {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+}
+
+/* Celulares Pequeños (400px) */
+@media screen and (max-width: 400px) {
+    .contenedor-login {
+        width: 95%;
+    }
+    .logo-sisbar span,
+    .logo-sisbar .h2-bienvenido {
+        font-size: 20px;
+    }
+}

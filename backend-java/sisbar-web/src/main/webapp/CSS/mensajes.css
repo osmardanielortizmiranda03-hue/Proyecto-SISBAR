@@ -1,0 +1,22 @@
+/* Alertas usadas por las páginas JSP del módulo web (éxito / error) */
+.alerta {
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 12px 0;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+.alerta ul { margin: 0; padding-left: 18px; }
+.alerta ul li { list-style: disc; }
+.alerta-error {
+    background: rgba(229, 57, 53, 0.12);
+    border: 1px solid #e53935;
+    color: #ffb3b0;
+}
+.alerta-exito {
+    background: rgba(67, 160, 71, 0.12);
+    border: 1px solid #43a047;
+    color: #b9f6ca;
+}
+.form-eliminar { display: inline; margin: 0; }
+.vacio { opacity: .7; padding: 24px 0; }
