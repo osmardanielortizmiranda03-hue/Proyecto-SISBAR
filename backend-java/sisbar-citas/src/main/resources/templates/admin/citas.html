@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CITAS - PANEL ADMINISTRADOR - SISBAR</title>
+
+    <!-- Material Icons & Materialize CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@100..900&family=Barlow+Condensed:wght@200&family=Karla:ital,wght@0,200..800;1,200..800&family=Oswald:wght@200&family=Playfair+Display+SC:wght@400..900&family=Space+Grotesk:wght@300&display=swap" rel="stylesheet">
+
+    <!-- CSS Personalizado -->
+    <link rel="stylesheet" th:href="@{/css/citas-admin.css}">
+    <link rel="stylesheet" th:href="@{/css/mensajes.css}">
+    <link rel="stylesheet" th:href="@{/css/sisbar-citas.css}">
+</head>
+<body>
+
+    <!-- LAYOUT PRINCIPAL -->
+    <div class="dashboard">
+
+        <!-- SIDEBAR IZQUIERDO -->
+        <aside class="sidebar" aria-label="Navegación principal">
+            <header class="sidebar-header">
+                <div class="fila-superior">
+                    <div class="icono" aria-hidden="true">
+                        <i class="material-icons">content_cut</i>
+                    </div>
+                    <h2 class="titulo-app">SISBAR</h2>
+                </div>
+                <p>Panel Administrativo</p>
+            </header>
+
+            <nav class="menu" aria-label="Menú lateral">
+                <ul>
+                    <li>
+                        <a href="#">
+                            <i class="material-icons">dashboard</i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="material-icons">group</i>
+                            <span>Usuarios</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="material-icons">content_cut</i>
+                            <span>Servicios</span>
+                        </a>
+                    </li>
+                    <li class="activo">
+                        <a th:href="@{/admin/citas}">
+                            <i class="material-icons">event</i>
+                            <span>Citas</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="material-icons">shopping_bag</i>
+                            <span>Productos</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="material-icons">attach_money</i>
+                            <span>Pagos</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="material-icons">bar_chart</i>
+                            <span>Reportes</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="material-icons">settings</i>
+                            <span>Configuración</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a th:href="@{/logout}" class="cerrar-sesion">
+                            <i class="material-icons">logout</i>
+                            <span>Cerrar Sesión</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <!-- VISTA DEL FORMULARIO DE RESERVA -->
+            <!-- FONDO ANIMADO -->
+        <div class="contenido">
+
+            <!-- BARRA SUPERIOR (TOPBAR) -->
+            <header class="topbar">
+                <nav class="nav-wrapper">
+                    <a href="#" class="brand-logo">
+                        <img th:src="@{/img/logo-sisbar.png}" alt="Logo SISBAR">
+                    </a>
+
+                    <a href="#" class="sidenav-trigger" data-target="mobile-menu" aria-label="Abrir menú móvil">
+                        <i class="material-icons">menu</i>
+                    </a>
+
+                    <div class="usuario">
+                        <div class="avatar-usuario" aria-hidden="true" th:text="${usuario.inicial()}">C</div>
+                        <span th:text="${usuario.nombreCompleto()}">Carlos Ramírez</span>
+                    </div>
+                </nav>
+
+                <!-- MENÚ RESPONSIVE -->
+                <ul class="sidenav" id="mobile-menu">
+                    <li class="sidebar-header">
+                        <div class="fila-superior">
+                            <div class="icono"><i class="material-icons">content_cut</i></div>
+                            <h2>SISBAR</h2>
+                        </div>
+                        <p>Portal del Cliente</p>
+                    </li>
+                    <li class="sidebar-header">
+                        <div class="fila-superior">
+                            <div class="icono"><i class="material-icons">content_cut</i></div>
+                            <h2>SISBAR</h2>
+                        </div>
+                        <p>Portal del Cliente</p>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="material-icons">dashboard</i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="material-icons">group</i>
+                            <span>Usuarios</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="material-icons">content_cut</i>
+                            <span>Servicios</span>
+                        </a>
+                    </li>
+                    <li class="activo">
+                        <a th:href="@{/admin/citas}">
+                            <i class="material-icons">event</i>
+                            <span>Citas</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="material-icons">shopping_bag</i>
+                            <span>Productos</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="material-icons">attach_money</i>
+                            <span>Pagos</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="material-icons">bar_chart</i>
+                            <span>Reportes</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="material-icons">settings</i>
+                            <span>Configuración</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a th:href="@{/logout}" class="cerrar-sesion">
+                            <i class="material-icons">logout</i>
+                            <span>Cerrar Sesión</span>
+                        </a>
+                    </li>
+                </ul>
+            </header>
+
+            <div class="stars-background">
+                <div id="stars"></div>
+                <div id="stars2"></div>
+                <div id="stars3"></div>
+                <main>
+                    <!-- SECCIÓN 1: ENCABEZADO -->
+                    <section class="header-section">
+                        <h3>Control</h3>
+                        <h1>Gestión de Citas</h1>
+                    </section>
+
+                    <!-- Mensajes de éxito o error enviados por el controlador -->
+                    <div class="mensajes-modulo">
+                        <div class="alerta alerta-exito" th:if="${exito}" th:text="${exito}">Éxito</div>
+                        <div class="alerta alerta-error" th:if="${error}" th:text="${error}">Error</div>
+                    </div>
+
+                    <!-- SECCIÓN 2: TARJETAS DE RESUMEN (conteo por estado desde la BD) -->
+                    <section class="stats-section">
+                        <div class="stat-card" th:each="e : ${estados}">
+                            <div class="stat-value" th:text="${resumen[e.name()]}">0</div>
+                            <div class="stat-label" th:text="${e.etiqueta} + 's'">Pendientes</div>
+                        </div>
+                    </section>
+
+                    <!-- SECCIÓN 3: FILTROS (formulario GET: los filtros viajan en la URL) -->
+                    <form class="filtros-citas" method="get" th:action="@{/admin/citas}">
+                        <div class="filtro">
+                            <label for="filtroEstado">Estado</label>
+                            <select id="filtroEstado" name="estado" class="browser-default">
+                                <option value="">Todos</option>
+                                <option th:each="e : ${estados}" th:value="${e}" th:text="${e.etiqueta}"
+                                        th:selected="${e == estadoFiltro}">Pendiente</option>
+                            </select>
+                        </div>
+                        <div class="filtro">
+                            <label for="filtroFecha">Fecha</label>
+                            <input id="filtroFecha" type="date" name="fecha" th:value="${fechaFiltro}">
+                        </div>
+                        <button type="submit" class="btn-filtrar"><i class="material-icons">filter_list</i> Filtrar</button>
+                        <a th:href="@{/admin/citas}" class="btn-limpiar">Limpiar</a>
+                    </form>
+
+                    <!-- SECCIÓN 4: TABLA DE CITAS -->
+                    <section class="citas-section">
+                        <table class="citas-table">
+                        <thead>
+                            <tr>
+                            <th>#</th>
+                            <th>Cliente</th>
+                            <th>Servicio</th>
+                            <th>Barbero</th>
+                            <th>Fecha</th>
+                            <th>Hora</th>
+                            <th>Estado</th>
+                            <th>Monto</th>
+                            <th>Cambiar estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:if="${#lists.isEmpty(citas)}">
+                                <td colspan="9" class="sin-datos">No hay citas con esos filtros.</td>
+                            </tr>
+                            <tr th:each="c : ${citas}" th:id="'cita-' + ${c.id}">
+                            <td th:text="${c.id}">1</td>
+                            <td class="cliente" th:text="${c.cliente.usuario.nombre + ' ' + c.cliente.usuario.apellido}">Carlos Ramírez</td>
+                            <td class="servicio" th:text="${c.servicio != null} ? ${c.servicio.nombre} : '-'">Corte Clásico</td>
+                            <td class="barbero" th:text="${c.barbero.nombreCompleto}">Rodrigo Salinas</td>
+                            <td class="fecha" th:text="${#temporals.format(c.fechaCita, 'yyyy-MM-dd')}">2026-06-20</td>
+                            <td class="hora" th:text="${#temporals.format(c.fechaCita, 'HH:mm')}">10:00</td>
+                            <td><span class="estado" th:classappend="${#strings.toLowerCase(c.estado.name())}"
+                                      th:text="${c.estado.etiqueta}">Pendiente</span></td>
+                            <td class="monto"
+                                th:text="${c.servicio != null} ? '$' + ${#numbers.formatDecimal(c.servicio.precio, 0, 'POINT', 0, 'COMMA')} : '-'">$20.000</td>
+                            <td>
+                                <!-- Solo se puede cambiar si no está cancelada ni completada -->
+                                <form th:if="${c.estado.name() == 'PENDIENTE' or c.estado.name() == 'CONFIRMADA'}"
+                                      class="form-estado" method="post" th:action="@{/admin/citas/{id}/estado(id=${c.id})}">
+                                    <select name="estado" class="browser-default">
+                                        <option th:each="e : ${estados}" th:value="${e}" th:text="${e.etiqueta}"
+                                                th:selected="${e == c.estado}">Pendiente</option>
+                                    </select>
+                                    <button type="submit" class="icon-btn" title="Guardar estado">
+                                        <i class="material-icons">save</i>
+                                    </button>
+                                </form>
+                            </td>
+                            </tr>
+                        </tbody>
+                        </table>
+                    </section>
+                </main>
+            </div>
+    </div>
+    </div> <!-- Cierre correcto del fondo animado -->
+
+    <!-- Materialize JS (necesario para que funcione el modal) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        // Inicializa los componentes de Materialize (menú móvil / sidenav)
+        document.addEventListener("DOMContentLoaded", () => {
+            M.AutoInit();
+        });
+    </script>
+</body>
+</html>

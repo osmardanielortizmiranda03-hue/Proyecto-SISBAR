@@ -1,0 +1,10 @@
+Evidencia GA7-220501096-AA3-EV01 - Codificación de módulos del software stand-alone, web y móvil
+Aprendiz: Osmar Daniel Ortiz Miranda
+Proyecto: SISBAR - Sistema web para barbería
+Módulo: Citas (Spring Boot)
+
+Enlace del repositorio (GitHub):
+https://github.com/osmardanielortizmiranda03-hue/Proyecto-SISBAR
+
+Módulo de citas dentro del repositorio:
+https://github.com/osmardanielortizmiranda03-hue/Proyecto-SISBAR/tree/master/backend-java/sisbar-citas

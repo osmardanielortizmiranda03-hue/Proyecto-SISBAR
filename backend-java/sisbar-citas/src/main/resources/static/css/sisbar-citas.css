@@ -1,0 +1,180 @@
+/*==================================================
+=  ESTILOS ADICIONALES DEL MÓDULO DE CITAS          =
+=  Complementan los CSS originales del prototipo   =
+=  (no los reemplazan).                            =
+==================================================*/
+:root {
+    --sb-gold: #c9a84c;
+    --sb-green: #43a047;
+    --sb-blue: #4f8cff;
+    --sb-red: #e53935;
+}
+
+/* Contenedor de mensajes de éxito / error */
+.mensajes-modulo {
+    margin: 0 0 16px 0;
+}
+
+/* Texto cuando una lista está vacía */
+.sin-datos {
+    opacity: .75;
+    padding: 18px 8px;
+    text-align: center;
+}
+.sin-accion {
+    opacity: .5;
+}
+
+/* ---------- Agendar cita ---------- */
+.info-general-servicios-cortes,
+.info-general-barbero {
+    cursor: pointer;
+}
+.nota-horarios {
+    font-size: .85rem;
+    opacity: .75;
+    margin-top: 10px;
+}
+.dias-mes .vacio {
+    visibility: hidden;
+    pointer-events: none;
+}
+.hora.activo,
+.hora.activa {
+    background: var(--sb-gold) !important;
+    color: #0a0a0a !important;
+}
+/* El botón "Cancelar" del resumen es un enlace; se centra como botón */
+.sidebar-derecha a.btn-cancelar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+/* ---------- Mis citas ---------- */
+.btn-nueva-cita {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--sb-gold);
+    color: #0a0a0a;
+    font-weight: 600;
+    padding: 10px 18px;
+    border-radius: 6px;
+    margin-top: 12px;
+}
+.btn-nueva-cita:hover {
+    filter: brightness(1.1);
+}
+.badge-estado {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: .8rem;
+    font-weight: 600;
+    border: 1px solid currentColor;
+}
+.badge-estado.pendiente,
+.estado.pendiente   { color: var(--sb-gold); }
+.badge-estado.confirmada,
+.estado.confirmada  { color: var(--sb-blue); }
+.badge-estado.completada,
+.estado.completada  { color: var(--sb-green); }
+.badge-estado.cancelada,
+.estado.cancelada   { color: var(--sb-red); }
+
+.tabla-citas form {
+    margin: 0;
+}
+.tabla-citas button.btn-cancelar {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    background: transparent;
+    color: #ff6b6b;
+    border: 1px solid #ff6b6b;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: .85rem;
+    transition: background .2s ease, color .2s ease;
+}
+.tabla-citas button.btn-cancelar:hover {
+    background: #ff6b6b;
+    color: #0a0a0a;
+}
+
+/* ---------- Administrador ---------- */
+.stats-section {
+    flex-wrap: wrap;
+}
+.filtros-citas {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 14px;
+    margin: 20px 0;
+}
+.filtros-citas .filtro {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 170px;
+}
+.filtros-citas label {
+    color: #bbb;
+    font-size: .8rem;
+}
+.filtros-citas select,
+.filtros-citas input[type="date"],
+.form-estado select {
+    background: #111;
+    color: #eee;
+    border: 1px solid #333;
+    border-radius: 6px;
+    height: 40px;
+    padding: 0 10px;
+    margin: 0;
+}
+.btn-filtrar,
+.btn-limpiar {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 40px;
+    padding: 0 16px;
+    border-radius: 6px;
+    border: 1px solid var(--sb-gold);
+    background: var(--sb-gold);
+    color: #0a0a0a;
+    font-weight: 600;
+    cursor: pointer;
+}
+.btn-limpiar {
+    background: transparent;
+    color: var(--sb-gold);
+}
+.form-estado {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0;
+}
+.form-estado select {
+    height: 34px;
+    width: auto;
+}
+.form-estado .icon-btn {
+    color: var(--sb-gold);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+    .filtros-citas {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}

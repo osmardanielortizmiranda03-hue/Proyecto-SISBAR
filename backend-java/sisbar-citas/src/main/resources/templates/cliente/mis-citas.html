@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Citas - SISBAR</title>
+
+    <!-- Material Icons & Materialize CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> <!-- web:9 -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> <!-- web:9 -->
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"> <!-- web:3 -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <!-- web:3 -->
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@100..900&family=Barlow+Condensed:wght@200&family=Karla:ital,wght@0,200..800;1,200..800&family=Oswald:wght@200&family=Playfair+Display+SC:wght@400..900&family=Space+Grotesk:wght@300&display=swap"
+        rel="stylesheet"> <!-- web:3 -->
+
+    <!-- CSS Personalizado -->
+    <link rel="stylesheet" th:href="@{/css/mis-citas.css}">
+    <link rel="stylesheet" th:href="@{/css/mensajes.css}">
+    <link rel="stylesheet" th:href="@{/css/sisbar-citas.css}">
+</head>
+<body>
+    <!-- ==========================================================
+        LAYOUT PRINCIPAL
+        Contenedor general del dashboard.
+    ========================================================== -->
+    <div class="dashboard">
+
+        <!-- ==========================================================
+            SIDEBAR IZQUIERDO
+            Menú principal de navegación.
+        ========================================================== -->
+        <aside class="sidebar" aria-label="Navegación principal">
+
+            <!-- Cabecera del sidebar -->
+            <header class="sidebar-header">
+
+                <div class="fila-superior">
+
+                    <!-- Icono del sistema -->
+                    <div class="icono" aria-hidden="true">
+                        <i class="material-icons">content_cut</i>
+                    </div>
+
+                    <!-- Nombre de la aplicación -->
+                    <h2 class="titulo-app">SISBAR</h2>
+
+                </div>
+
+                <p>Portal del Cliente</p>
+
+            </header>
+
+            <!-- ==========================================================
+                MENÚ DE NAVEGACIÓN
+            ========================================================== -->
+            <nav class="menu" aria-label="Menú lateral">
+
+                <ul>
+
+                    <li>
+                        <a href="#">
+                            <i class="material-icons">event</i>
+                            <span>Inicio</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{/cliente/citas/nueva}">
+                            <i class="material-icons">event_available</i>
+                            <span>Agendar Cita</span>
+                        </a>
+                    </li>
+
+                    <li class="activo">
+                        <a th:href="@{/cliente/citas}">
+                            <i class="material-icons">schedule</i>
+                            <span>Mis Citas</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <i class="material-icons">inventory_2</i>
+                            <span>Productos</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <i class="material-icons">account_circle</i>
+                            <span>Mi Perfil</span>
+                        </a>
+                    </li>
+
+                    <!-- Cerrar sesión -->
+                    <li>
+                        <a th:href="@{/logout}" class="cerrar-sesion">
+                            <i class="material-icons">logout</i>
+                            <span>Cerrar Sesión</span>
+                        </a>
+                    </li>
+
+                </ul>
+
+            </nav>
+
+        </aside>
+
+        <!-- ==========================================================
+            CONTENIDO PRINCIPAL
+            Contenedor de toda la información de la página.
+        ========================================================== -->
+        <div class="contenido">
+
+            <!-- ==========================================================
+                BARRA SUPERIOR (TOPBAR)
+                Información del usuario y menú móvil.
+            ========================================================== -->
+            <header class="topbar">
+
+                <nav class="nav-wrapper">
+
+                    <!-- Logo del sistema -->
+                    <a href="#" class="brand-logo">
+                        <img th:src="@{/img/logo-sisbar.png}" alt="Logo SISBAR">
+                    </a>
+
+                    <!-- Botón del menú hamburguesa -->
+                    <a href="#"
+                        class="sidenav-trigger"
+                        data-target="mobile-menu"
+                        aria-label="Abrir menú móvil">
+
+                        <i class="material-icons">menu</i>
+
+                    </a>
+
+                    <!-- Información del usuario -->
+                    <div class="usuario">
+
+                        <div class="avatar" aria-hidden="true" th:text="${usuario.inicial()}">C</div>
+
+                        <span th:text="${usuario.nombreCompleto()}">Carlos Ramírez</span>
+
+                    </div>
+
+                </nav>
+
+                <!-- ==========================================================
+                    MENÚ RESPONSIVE
+                    Visible únicamente en dispositivos móviles.
+                ========================================================== -->
+                <ul class="sidenav" id="mobile-menu">
+
+                    <li class="sidebar-header">
+
+                        <div class="fila-superior">
+
+                            <div class="icono">
+                                <i class="material-icons">content_cut</i>
+                            </div>
+
+                            <h2>SISBAR</h2>
+
+                        </div>
+
+                        <p>Portal del Cliente</p>
+
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <i class="material-icons">event</i>
+                            <span>Inicio</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{/cliente/citas/nueva}">
+                            <i class="material-icons">event_available</i>
+                            <span>Agendar Cita</span>
+                        </a>
+                    </li>
+
+                    <li class="activo">
+                        <a th:href="@{/cliente/citas}">
+                            <i class="material-icons">schedule</i>
+                            <span>Mis Citas</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <i class="material-icons">inventory_2</i>
+                            <span>Productos</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <i class="material-icons">account_circle</i>
+                            <span>Mi Perfil</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{/logout}" class="cerrar-sesion">
+                            <i class="material-icons">logout</i>
+                            <span>Cerrar Sesión</span>
+                        </a>
+                    </li>
+
+                </ul>
+
+            </header>
+            <div class="stars-background">
+                <div id="stars"></div>
+                <div id="stars2"></div>
+                <div id="stars3"></div>
+            <main>
+                    <!-- TITULOS PRINCIPALES -->
+                    <section class="contenido-principal">
+                            <div class="bienvenida">
+                                <h3>Historial</h3>
+                                <h1>Mis Citas</h1>
+                            </div>
+                            <a th:href="@{/cliente/citas/nueva}" class="btn-nueva-cita">
+                                <i class="material-icons">add</i> Agendar nueva cita
+                            </a>
+                    </section>
+
+                    <!-- Mensajes de éxito o error enviados por el controlador -->
+                    <div class="mensajes-modulo">
+                        <div class="alerta alerta-exito" th:if="${exito}" th:text="${exito}">Éxito</div>
+                        <div class="alerta alerta-error" th:if="${error}" th:text="${error}">Error</div>
+                    </div>
+
+                    <section class="seccion-citas">
+                        <!-- Contenedor que activa el scroll horizontal -->
+                        <div class="tabla-contenedor">
+                            <table class="tabla-citas">
+                                <thead>
+                                    <tr>
+                                        <th>SERVICIO</th>
+                                        <th>BARBERO</th>
+                                        <th>FECHA</th>
+                                        <th>HORA</th>
+                                        <th>PRECIO</th>
+                                        <th>ESTADO</th>
+                                        <th>ACCIONES</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Mensaje si el cliente todavía no tiene citas -->
+                                    <tr th:if="${#lists.isEmpty(citas)}">
+                                        <td colspan="7" class="sin-datos">Aún no tienes citas. ¡Agenda la primera!</td>
+                                    </tr>
+
+                                    <!-- Una fila por cada cita (th:each) -->
+                                    <tr th:each="c : ${citas}">
+                                        <td><strong th:text="${c.servicio != null} ? ${c.servicio.nombre} : 'Servicio'">Corte Clásico</strong></td>
+                                        <td th:text="${c.barbero.nombreCompleto}">Carlos Ramírez</td>
+                                        <td th:text="${#temporals.format(c.fechaCita, 'yyyy-MM-dd')}">2026-06-20</td>
+                                        <td th:text="${#temporals.format(c.fechaCita, 'HH:mm')}">10:00</td>
+                                        <td class="precio"
+                                            th:text="${c.servicio != null} ? '$' + ${#numbers.formatDecimal(c.servicio.precio, 0, 'POINT', 0, 'COMMA')} : '-'">$20.000</td>
+                                        <td>
+                                            <span class="badge-estado" th:classappend="${#strings.toLowerCase(c.estado.name())}"
+                                                  th:text="${c.estado.etiqueta}">Pendiente</span>
+                                        </td>
+                                        <td>
+                                            <!-- Cancelar usa POST porque modifica datos -->
+                                            <form th:if="${c.cancelablePorCliente}" method="post"
+                                                  th:action="@{/cliente/citas/{id}/cancelar(id=${c.id})}"
+                                                  onsubmit="return confirm('¿Seguro que deseas cancelar esta cita?');">
+                                                <button type="submit" class="btn-cancelar">
+                                                    <i class="material-icons">cancel</i> Cancelar
+                                                </button>
+                                            </form>
+                                            <span th:unless="${c.cancelablePorCliente}" class="sin-accion">—</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+            </main>
+
+        </div> <!-- Cierre de .contenido -->
+
+    </div> <!-- Cierre de .dashboard -->
+
+</div> <!-- Cierre de .stars-background -->
+
+<!-- Materialize JavaScript (Necesario para el menú móvil / sidenav) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        // Inicializa los componentes de Materialize (menú móvil / sidenav)
+        document.addEventListener("DOMContentLoaded", () => {
+            M.AutoInit();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendar Cita - SISBAR</title>
+
+    <!-- Material Icons & Materialize CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@100..900&family=Barlow+Condensed:wght@200&family=Karla:ital,wght@0,200..800;1,200..800&family=Oswald:wght@200&family=Playfair+Display+SC:wght@400..900&family=Space+Grotesk:wght@300&display=swap" rel="stylesheet">
+
+    <!-- CSS Personalizado -->
+    <link rel="stylesheet" th:href="@{/css/agendar-cita.css}">
+    <link rel="stylesheet" th:href="@{/css/mensajes.css}">
+    <link rel="stylesheet" th:href="@{/css/sisbar-citas.css}">
+</head>
+<body>
+
+    <!-- LAYOUT PRINCIPAL -->
+    <div class="dashboard">
+
+        <!-- SIDEBAR IZQUIERDO -->
+        <aside class="sidebar" aria-label="Navegación principal">
+            <header class="sidebar-header">
+                <div class="fila-superior">
+                    <div class="icono" aria-hidden="true">
+                        <i class="material-icons">content_cut</i>
+                    </div>
+                    <h2 class="titulo-app">SISBAR</h2>
+                </div>
+                <p>Portal del Cliente</p>
+            </header>
+
+            <nav class="menu" aria-label="Menú lateral">
+                <ul>
+                    <li>
+                        <a href="#">
+                            <i class="material-icons">event</i>
+                            <span>Inicio</span>
+                        </a>
+                    </li>
+                    <li class="activo">
+                        <a th:href="@{/cliente/citas/nueva}">
+                            <i class="material-icons">event_available</i>
+                            <span>Agendar Cita</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a th:href="@{/cliente/citas}">
+                            <i class="material-icons">schedule</i>
+                            <span>Mis Citas</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="material-icons">inventory_2</i>
+                            <span>Productos</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="material-icons">account_circle</i>
+                            <span>Mi Perfil</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a th:href="@{/logout}" class="cerrar-sesion">
+                            <i class="material-icons">logout</i>
+                            <span>Cerrar Sesión</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <!-- VISTA DEL FORMULARIO DE RESERVA -->
+            <!-- FONDO ANIMADO -->
+        <div class="contenido">
+
+            <!-- BARRA SUPERIOR (TOPBAR) -->
+            <header class="topbar">
+                <nav class="nav-wrapper">
+                    <a href="#" class="brand-logo">
+                        <img th:src="@{/img/logo-sisbar.png}" alt="Logo SISBAR">
+                    </a>
+
+                    <a href="#" class="sidenav-trigger" data-target="mobile-menu" aria-label="Abrir menú móvil">
+                        <i class="material-icons">menu</i>
+                    </a>
+
+                    <div class="usuario">
+                        <div class="avatar" aria-hidden="true" th:text="${usuario.inicial()}">C</div>
+                        <span th:text="${usuario.nombreCompleto()}">Carlos Ramírez</span>
+                    </div>
+                </nav>
+
+                <!-- MENÚ RESPONSIVE -->
+                <ul class="sidenav" id="mobile-menu">
+                    <li class="sidebar-header">
+                        <div class="fila-superior">
+                            <div class="icono"><i class="material-icons">content_cut</i></div>
+                            <h2>SISBAR</h2>
+                        </div>
+                        <p>Portal del Cliente</p>
+                    </li>
+                    <li><a href="#"><i class="material-icons">event</i><span>Inicio</span></a></li>
+                    <li><a th:href="@{/cliente/citas/nueva}"><i class="material-icons">event_available</i><span>Agendar Cita</span></a></li>
+                    <li><a th:href="@{/cliente/citas}"><i class="material-icons">schedule</i><span>Mis Citas</span></a></li>
+                    <li><a href="#"><i class="material-icons">inventory_2</i><span>Productos</span></a></li>
+                    <li><a href="#"><i class="material-icons">account_circle</i><span>Mi Perfil</span></a></li>
+                    <li><a th:href="@{/logout}" class="cerrar-sesion"><i class="material-icons">logout</i><span>Cerrar Sesión</span></a></li>
+                </ul>
+            </header>
+
+            <div class="stars-background">
+                    <div id="stars"></div>
+                    <div id="stars2"></div>
+                    <div id="stars3"></div>
+                    <main>
+                        <section class="contenido-principal">
+                            <div class="bienvenida">
+                                <h3>Panel del cliente</h3>
+                                <h1 th:text="'Bienvenido ' + ${usuario.nombre}">Bienvenido Carlos</h1>
+                            </div>
+                        </section>
+
+
+                        <!-- Mensajes de éxito o error enviados por el controlador -->
+                        <div class="mensajes-modulo">
+                            <div class="alerta alerta-exito" th:if="${exito}" th:text="${exito}">Éxito</div>
+                            <div class="alerta alerta-error" th:if="${error}" th:text="${error}">Error</div>
+                        </div>
+
+                        <!-- Formulario enviado por POST a CitaClienteControlador.agendar() -->
+                        <form id="formCita" th:action="@{/cliente/citas/nueva}" th:object="${citaForm}" method="post">
+                        <div class="contenedor-principal-reservas">
+
+                            <!-- COLUMNA IZQUIERDA: PASOS DE SELECCIÓN -->
+                            <div class="contenedor-reservas">
+
+                                <!-- Paso 1: Servicios (se cargan desde la tabla "servicio") -->
+                                <section class="caja-cortes">
+                                    <div class="encabezado-cortes">
+                                        <span>1</span>
+                                        <h4>Selecciona un servicio</h4>
+                                    </div>
+
+                                    <div class="contenedor-principal-cortes">
+                                        <p class="sin-datos" th:if="${#lists.isEmpty(servicios)}">Aún no hay servicios registrados.</p>
+
+                                        <!-- th:each repite la tarjeta por cada servicio -->
+                                        <div class="info-general-servicios-cortes"
+                                             th:each="s, i : ${servicios}"
+                                             th:classappend="${citaForm.servicioId == s.id} ? 'activo'"
+                                             th:attr="data-id=${s.id},data-nombre=${s.nombre},data-precio=${s.precio},data-duracion=${s.duracionMinutos}">
+                                            <div class="icono">
+                                                <i class="material-icons"
+                                                   th:text="${ {'content_cut','workspace_premium','star','face','spa'}[i.index % 5] }">content_cut</i>
+                                            </div>
+                                            <div class="name-servicio">
+                                                <h5 th:text="${s.nombre}">Corte Clásico</h5>
+                                            </div>
+                                            <div class="footer-principal-cortes">
+                                                <span th:text="${s.duracionMinutos} + 'min'">45min</span>
+                                                <span th:text="'$' + ${#numbers.formatDecimal(s.precio, 0, 'POINT', 0, 'COMMA')}">$20.000</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <!-- Paso 2: Barberos activos (tabla "barbero" + "usuario") -->
+                                <section class="caja-barberos paso-bloqueado">
+                                    <div class="encabezado-barberos">
+                                        <span>2</span>
+                                        <h4>Selecciona un barbero</h4>
+                                    </div>
+
+                                    <div class="contenedor-principal-barberos">
+                                        <p class="sin-datos" th:if="${#lists.isEmpty(barberos)}">No hay barberos disponibles en este momento.</p>
+
+                                        <div class="info-general-barbero"
+                                             th:each="b, i : ${barberos}"
+                                             th:classappend="${citaForm.barberoId == b.id} ? 'activo'"
+                                             th:attr="data-id=${b.id},data-nombre=${b.nombreCompleto}">
+                                            <div class="foto-barbero">
+                                                <img th:src="@{'/img/foto-barbero-0' + ${i.index % 3 + 1} + '.png'}" alt="Foto del barbero">
+                                            </div>
+                                            <div class="nombre-barbero">
+                                                <h5 th:text="${b.nombreCompleto}">Carlos Ramírez</h5>
+                                            </div>
+                                            <div class="especialidad-barbero">
+                                                <p th:text="'Especialista en ' + ${#strings.toLowerCase(b.especializacion)}">Especialista en cortes clásicos</p>
+                                            </div>
+                                            <div class="calificacion-barbero">
+                                                <i class="material-icons">verified</i>
+                                                <span>Disponible</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <!-- Pasos 3 y 4: Fecha y Horario -->
+                                <div class="contenedor-fecha-horario">
+
+                                    <!-- Paso 3: el calendario lo dibuja JavaScript (agendar-cita.js) -->
+                                    <section class="caja-fecha paso-bloqueado">
+                                        <div class="encabezado-fecha">
+                                            <span>3</span>
+                                            <h4>Fecha</h4>
+                                        </div>
+
+                                        <div class="calendario">
+                                            <div class="navegacion-mes">
+                                                <button type="button" id="mesAnterior" aria-label="Mes anterior"><i class="material-icons">chevron_left</i></button>
+                                                <h5 id="tituloMes">Mes</h5>
+                                                <button type="button" id="mesSiguiente" aria-label="Mes siguiente"><i class="material-icons">chevron_right</i></button>
+                                            </div>
+                                            <div class="dias-semana">
+                                                <span>Dom</span><span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span>
+                                            </div>
+                                            <div class="dias-mes" id="diasMes"></div>
+                                        </div>
+                                    </section>
+
+                                    <!-- Paso 4: horarios. Se habilitan con los datos que responde el servidor -->
+                                    <section class="caja-horario paso-bloqueado">
+                                        <div class="encabezado-horario">
+                                            <span>4</span>
+                                            <h4>Horario</h4>
+                                        </div>
+
+                                        <div class="contenedor-horarios" id="contenedorHorarios">
+                                            <button type="button" class="hora deshabilitada"
+                                                    th:each="h : ${todosLosHorarios}"
+                                                    th:text="${h}" th:attr="data-hora=${h}">09:00</button>
+                                        </div>
+                                        <p class="nota-horarios" id="notaHorarios">Selecciona una fecha para ver los horarios libres.</p>
+                                    </section>
+                                </div>
+
+                                <!-- Paso 5: Observaciones (se guardan en la columna "observaciones") -->
+                                <section class="caja-observaciones">
+                                    <div class="encabezado-observaciones">
+                                        <span>5</span>
+                                        <h4>Observaciones</h4>
+                                    </div>
+
+                                    <div class="contenedor-observaciones">
+                                        <textarea name="observaciones" maxlength="255" rows="5"
+                                                  th:text="${citaForm.observaciones}"
+                                                  placeholder="Ej: Prefiero degradado suave, tengo alergia a ciertos productos..."></textarea>
+                                    </div>
+                                </section>
+
+                            </div> <!-- Cierre de contenedor-reservas -->
+
+                            <!-- COLUMNA DERECHA: SIDEBAR RESUMEN -->
+                            <aside class="sidebar-derecha">
+                                <section class="resumen-reserva">
+                                    <div class="encabezado-resumen">
+                                        <h4>Resumen de la Reserva</h4>
+                                    </div>
+
+                                    <div class="contenido-resumen">
+                                        <div class="dato-reserva">
+                                            <span>Servicio</span>
+                                            <h5 class="valor-servicio">-</h5>
+                                        </div>
+                                        <div class="dato-reserva">
+                                            <span>Barbero</span>
+                                            <h5 class="valor-barbero">-</h5>
+                                        </div>
+                                        <div class="dato-reserva">
+                                            <span>Fecha</span>
+                                            <h5 class="valor-fecha">-</h5>
+                                        </div>
+                                        <div class="dato-reserva">
+                                            <span>Hora</span>
+                                            <h5 class="valor-hora">-</h5>
+                                        </div>
+                                        <hr>
+                                        <div class="precio-reserva">
+                                            <span>Precio Estimado</span>
+                                            <h2 class="valor-precio">-</h2>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <!-- Campos ocultos: aquí JavaScript guarda lo que el cliente selecciona -->
+                                <input type="hidden" name="servicioId" id="servicioId" th:value="${citaForm.servicioId}">
+                                <input type="hidden" name="barberoId" id="barberoId" th:value="${citaForm.barberoId}">
+                                <input type="hidden" name="fecha" id="fecha" th:value="${citaForm.fecha}">
+                                <input type="hidden" name="hora" id="hora" th:value="${citaForm.hora != null} ? ${#temporals.format(citaForm.hora, 'HH:mm')} : ''">
+
+                                <button type="submit" class="btn-confirmar" disabled>Confirmar Reserva</button>
+                                <a th:href="@{/cliente/citas}" class="btn-cancelar">Cancelar</a>
+                            </aside>
+
+                        </div> <!-- Cierre de contenedor-principal-reservas -->
+                        </form>
+            </main>
+
+        </div>
+    </div>
+    </div> <!-- Cierre del fondo animado -->
+
+    <!-- Datos que JavaScript necesita (fecha de hoy y días máximos), enviados por el servidor -->
+    <script th:inline="javascript">
+        const CONFIG_AGENDA = {
+            hoy: /*[[${hoy}]]*/ '2026-09-23',
+            diasMaximos: /*[[${diasMaximos}]]*/ 30,
+            urlHorarios: /*[[@{/cliente/citas/horarios}]]*/ '/cliente/citas/horarios'
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script th:src="@{/js/agendar-cita.js}"></script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<!-- Página de error personalizada: Spring Boot la usa automáticamente para 404, 500, etc. -->
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error - SISBAR</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body style="background:#0a0a0a;color:#eee;">
+    <div class="container center-align" style="padding-top:90px;">
+        <h3 style="color:#c9a84c;">Ups, algo salió mal</h3>
+        <p th:text="'Código: ' + ${status}">Código: 404</p>
+        <p>La página que buscas no existe o ocurrió un error inesperado.</p>
+        <a class="btn" style="background:#c9a84c;color:#0a0a0a;" th:href="@{/}">Volver al inicio</a>
+    </div>
+</body>
+</html>
