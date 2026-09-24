@@ -31,6 +31,9 @@ public class Cita {
     /** Duración por defecto si la cita no tiene servicio asociado. */
     public static final int DURACION_POR_DEFECTO_MIN = 30;
 
+    /** HU05: no se permite cancelar con menos de estas horas de anticipación. */
+    public static final int HORAS_MINIMAS_CANCELACION = 2;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idcitas")
@@ -59,6 +62,10 @@ public class Cita {
     @Column(name = "observaciones", length = 255)
     private String observaciones;
 
+    /** HU06: fecha y hora en que el barbero confirmó que realizó el servicio. */
+    @Column(name = "fecha_atencion")
+    private LocalDateTime fechaAtencion;
+
     public Cita() {
         // Constructor vacío requerido por JPA
     }
@@ -73,10 +80,19 @@ public class Cita {
         return fechaCita.plusMinutes(getDuracionMinutos());
     }
 
-    /** El cliente solo puede cancelar citas activas que aún no han pasado. */
-    public boolean isCancelablePorCliente() {
-        return (estado == EstadoCita.PENDIENTE || estado == EstadoCita.CONFIRMADA)
-                && fechaCita.isAfter(LocalDateTime.now());
+    /** La cita sigue activa: pendiente o confirmada. */
+    public boolean isActiva() {
+        return estado == EstadoCita.PENDIENTE || estado == EstadoCita.CONFIRMADA;
+    }
+
+    /**
+     * El cliente solo puede cancelar citas activas y con al menos
+     * {@value #HORAS_MINIMAS_CANCELACION} horas de anticipación (HU05).
+     *
+     * @param ahora fecha y hora actual
+     */
+    public boolean esCancelableEn(LocalDateTime ahora) {
+        return isActiva() && fechaCita.isAfter(ahora.plusHours(HORAS_MINIMAS_CANCELACION));
     }
 
     // ---------- Getters y setters ----------
@@ -101,4 +117,7 @@ public class Cita {
 
     public String getObservaciones() { return observaciones; }
     public void setObservaciones(String observaciones) { this.observaciones = observaciones; }
+
+    public LocalDateTime getFechaAtencion() { return fechaAtencion; }
+    public void setFechaAtencion(LocalDateTime fechaAtencion) { this.fechaAtencion = fechaAtencion; }
 }

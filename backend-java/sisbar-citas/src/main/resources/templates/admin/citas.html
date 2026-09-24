@@ -247,12 +247,13 @@
                             <th>Hora</th>
                             <th>Estado</th>
                             <th>Monto</th>
+                            <th>Observaciones</th>
                             <th>Cambiar estado</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr th:if="${#lists.isEmpty(citas)}">
-                                <td colspan="9" class="sin-datos">No hay citas con esos filtros.</td>
+                                <td colspan="10" class="sin-datos">No hay citas con esos filtros.</td>
                             </tr>
                             <tr th:each="c : ${citas}" th:id="'cita-' + ${c.id}">
                             <td th:text="${c.id}">1</td>
@@ -265,6 +266,7 @@
                                       th:text="${c.estado.etiqueta}">Pendiente</span></td>
                             <td class="monto"
                                 th:text="${c.servicio != null} ? '$' + ${#numbers.formatDecimal(c.servicio.precio, 0, 'POINT', 0, 'COMMA')} : '-'">$20.000</td>
+                            <td class="observacion" th:text="${c.observaciones != null} ? ${c.observaciones} : '-'">Sin gel</td>
                             <td>
                                 <!-- Solo se puede cambiar si no está cancelada ni completada -->
                                 <form th:if="${c.estado.name() == 'PENDIENTE' or c.estado.name() == 'CONFIRMADA'}"

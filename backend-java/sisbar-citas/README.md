@@ -1,6 +1,6 @@
 # SISBAR – Módulo de Citas con Spring Boot
 
-**Evidencia:** GA7-220501096-AA3-EV01 – Codificación de módulos del software stand-alone, web y móvil
+**Evidencias:** GA7-220501096-AA3-EV01 (codificación) y GA7-220501096-AA3-EV02 (pruebas según historias de usuario)
 **Aprendiz:** Osmar Daniel Ortiz Miranda – Tecnología en Análisis y Desarrollo de Software (SENA)
 **Repositorio:** https://github.com/osmardanielortizmiranda03-hue/Proyecto-SISBAR
 **Carpeta del módulo:** `backend-java/sisbar-citas`
@@ -10,7 +10,8 @@ Módulo web del sistema SISBAR (barbería "Estilo y Cuidado") que permite:
 | Actor | Funcionalidad |
 |---|---|
 | Cliente | Agendar una cita en 5 pasos: servicio → barbero → fecha → hora → observaciones |
-| Cliente | Ver el historial de sus citas y cancelar las que aún no han pasado |
+| Cliente | Ver el historial de sus citas y cancelarlas con mínimo 2 horas de anticipación |
+| Barbero | Ver su agenda del día y confirmar los servicios realizados (queda la fecha de atención) |
 | Administrador | Ver todas las citas, filtrarlas por estado o fecha y cambiar su estado |
 
 Las vistas conservan el diseño de los prototipos del proyecto (`agendarcita.html`, `miscitas.html`, `citas.html` e `iniciar-sesion.html`).
@@ -57,7 +58,7 @@ sisbar-citas/
     ├── main/java/com/sisbar/
     │   ├── SisbarCitasApplication.java     ← clase principal (arranca la app)
     │   ├── config/                         ← interceptor de sesión, reloj, configuración MVC
-    │   ├── controlador/                    ← LoginControlador, CitaClienteControlador, CitaAdminControlador
+    │   ├── controlador/                    ← Login, CitaCliente, CitaBarbero y CitaAdmin
     │   ├── dto/                            ← CitaForm (formulario), UsuarioSesion
     │   ├── modelo/                         ← Usuario, Cliente, Barbero, Servicio, Cita, EstadoCita
     │   ├── repositorio/                    ← interfaces JpaRepository
@@ -84,8 +85,9 @@ sisbar-citas/
 3. Un horario está libre solo si la cita (según la duración del servicio) **no se cruza** con otra cita activa del mismo barbero.
 4. Solo aparecen barberos con estado `ACTIVO`.
 5. Toda cita nueva queda en estado **PENDIENTE**.
-6. El cliente solo puede cancelar **sus** citas pendientes o confirmadas que aún no han pasado.
-7. El administrador no puede modificar citas **completadas** ni **canceladas**.
+6. El cliente solo puede cancelar **sus** citas pendientes o confirmadas, con **mínimo 2 horas** de anticipación (HU05).
+7. El barbero confirma solo **sus** citas de hoy o de días anteriores; la cita pasa a COMPLETADA y se guarda `fecha_atencion` (HU06).
+8. El administrador no puede modificar citas **completadas** ni **canceladas**.
 
 ## 5. Estándares de codificación aplicados
 
@@ -100,7 +102,7 @@ sisbar-citas/
 
 ## 6. Cómo ejecutar
 
-1. **Base de datos:** en MySQL Workbench ejecutar `sql/modulo_citas.sql`. Agrega a `citas` las columnas `idservicio` y `observaciones` (solo si no existen) y crea datos de prueba.
+1. **Base de datos:** en MySQL Workbench ejecutar `sql/modulo_citas.sql`. Agrega a `citas` las columnas `idservicio`, `observaciones` y `fecha_atencion` (solo si no existen) y crea datos de prueba.
 2. **Conexión:** revisar usuario/contraseña de MySQL en `src/main/resources/application.properties`.
 3. **Ejecutar:**
    ```bash
@@ -112,6 +114,7 @@ sisbar-citas/
 | Perfil | Correo | Contraseña |
 |---|---|---|
 | Usuario (cliente) | cliente@sisbar.com | Cliente123 |
+| Barbero | carlos.barbero@sisbar.com | Barbero123 |
 | Administrador | admin@sisbar.com | Admin12345 |
 
 5. **Pruebas unitarias:** `mvn test`
@@ -128,14 +131,16 @@ sisbar-citas/
 | GET | `/cliente/citas/horarios` | Horarios libres en JSON (lo usa JavaScript) |
 | GET | `/cliente/citas` | Mis citas |
 | POST | `/cliente/citas/{id}/cancelar` | Cancela una cita |
+| GET | `/barbero/citas?fecha=` | Agenda del barbero |
+| POST | `/barbero/citas/{id}/confirmar` | Confirma el servicio realizado |
 | GET | `/admin/citas` | Listado con filtros (`estado`, `fecha`) |
 | POST | `/admin/citas/{id}/estado` | Cambia el estado de una cita |
 
 ## 8. Pruebas realizadas
 
-**Pruebas unitarias (JUnit 5 + Mockito): 14 de 14 exitosas.** Verifican los horarios libres, los cruces de citas, los domingos y fechas no válidas, el agendamiento, la creación automática del cliente, la cancelación (solo citas propias) y los cambios de estado del administrador.
+**Pruebas unitarias (JUnit 5 + Mockito): 17 de 17 exitosas.** Verifican los horarios libres, los cruces de citas, los domingos y fechas no válidas, el agendamiento, la creación automática del cliente, la cancelación (solo citas propias y con 2 horas de anticipación), la confirmación del servicio por el barbero y los cambios de estado del administrador.
 
-**Pruebas funcionales con la aplicación corriendo y la estructura real de la base de datos: 29 de 29 exitosas**, entre ellas:
+**Pruebas funcionales con la aplicación corriendo y la estructura real de la base de datos: 42 de 42 exitosas**, entre ellas:
 
 - El login rechaza contraseñas incorrectas y perfiles que no corresponden.
 - Un cliente no puede entrar al panel del administrador.
@@ -145,5 +150,7 @@ sisbar-citas/
 - Al cancelar una cita, su horario vuelve a quedar libre.
 - Los filtros del administrador (por estado y por fecha) y el cambio de estado funcionan.
 - No se puede modificar una cita cancelada.
+- Fechas y horas con formato inválido, fechas pasadas o lejanas, textos de más de 255 caracteres y caracteres especiales (se muestran como texto).
+- El barbero ve su agenda y confirma servicios; no puede confirmar citas futuras.
 
-Las capturas de pantalla están en `docs/capturas/`.
+Las capturas de pantalla están en `docs/capturas/` (AA3-EV01) y `docs/capturas-pruebas/` (AA3-EV02).

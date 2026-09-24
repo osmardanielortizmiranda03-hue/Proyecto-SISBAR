@@ -32,7 +32,13 @@ public class LoginControlador {
         if (usuario == null) {
             return "redirect:/login";
         }
-        return usuario.esAdmin() ? "redirect:/admin/citas" : "redirect:/cliente/citas/nueva";
+        if (usuario.esAdmin()) {
+            return "redirect:/admin/citas";
+        }
+        if (usuario.esBarbero()) {
+            return "redirect:/barbero/citas";
+        }
+        return "redirect:/cliente/citas/nueva";
     }
 
     /** GET /login: muestra el formulario. */

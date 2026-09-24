@@ -11,6 +11,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -54,7 +56,7 @@ public class CitaClienteControlador {
     public String misCitas(@SessionAttribute(UsuarioSesion.ATRIBUTO) UsuarioSesion usuario, Model model) {
         List<Cita> citas = citaServicio.citasDelCliente(usuario.id());
         model.addAttribute("citas", citas);
-        model.addAttribute("ahora", java.time.LocalDateTime.now());
+        model.addAttribute("ahora", citaServicio.ahora());
         return "cliente/mis-citas";
     }
 
@@ -78,7 +80,7 @@ public class CitaClienteControlador {
 
         // 1. Errores de las anotaciones (@NotNull, @Size...)
         if (validacion.hasErrors()) {
-            model.addAttribute("error", validacion.getAllErrors().get(0).getDefaultMessage());
+            model.addAttribute("error", mensajeDeError(validacion));
             cargarDatosFormulario(model);
             return "cliente/agendar-cita";
         }
@@ -125,6 +127,23 @@ public class CitaClienteControlador {
         return "redirect:/cliente/citas";
     }
 
+    /**
+     * Mensaje claro para el primer error del formulario.
+     * Si un dato no se pudo convertir (ej: fecha "2026-13-45" o hora "25:99"),
+     * Spring marca un "binding failure" y se muestra un mensaje propio.
+     */
+    private String mensajeDeError(BindingResult validacion) {
+        FieldError error = validacion.getFieldErrors().get(0);
+        if (error.isBindingFailure()) {
+            return switch (error.getField()) {
+                case "fecha" -> "La fecha no tiene un formato válido (año-mes-día).";
+                case "hora" -> "La hora no tiene un formato válido (HH:mm).";
+                default -> "El dato seleccionado no es válido.";
+            };
+        }
+        return error.getDefaultMessage();
+    }
+
     /** Datos que necesita la vista del formulario (servicios, barberos, horario). */
     private void cargarDatosFormulario(Model model) {
         model.addAttribute("servicios", citaServicio.listarServicios());
@@ -136,7 +155,7 @@ public class CitaClienteControlador {
 
     /** Lista de todos los turnos posibles del día, para dibujar los botones de hora. */
     private List<String> todosLosHorarios() {
-        List<String> horas = new java.util.ArrayList<>();
+        List<String> horas = new ArrayList<>();
         for (LocalTime[] jornada : HorarioBarberia.JORNADAS) {
             for (LocalTime h = jornada[0]; h.isBefore(jornada[1]); h = h.plusMinutes(HorarioBarberia.INTERVALO_MINUTOS)) {
                 horas.add(h.format(FORMATO_HORA));

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Barbero - SISBAR</title>
+
+    <!-- Material Icons & Materialize CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@100..900&family=Barlow+Condensed:wght@200&family=Karla:ital,wght@0,200..800;1,200..800&family=Oswald:wght@200&family=Playfair+Display+SC:wght@400..900&family=Space+Grotesk:wght@300&display=swap" rel="stylesheet">
+
+    <!-- CSS Personalizado -->
+    <link rel="stylesheet" th:href="@{/css/panel-barbero.css}">
+    <link rel="stylesheet" th:href="@{/css/mensajes.css}">
+    <link rel="stylesheet" th:href="@{/css/sisbar-citas.css}">
+</head>
+<body>
+
+    <!-- LAYOUT PRINCIPAL -->
+    <div class="dashboard">
+
+        <!-- SIDEBAR IZQUIERDO -->
+        <aside class="sidebar" aria-label="Navegación principal">
+            <header class="sidebar-header">
+                <div class="fila-superior">
+                    <div class="icono" aria-hidden="true">
+                        <i class="material-icons">content_cut</i>
+                    </div>
+                    <h2 class="titulo-app">SISBAR</h2>
+                </div>
+                <p>Panel del Barbero</p>
+            </header>
+
+            <nav class="menu" aria-label="Menú lateral">
+                <ul>
+                    <li>
+                        <a href="#">
+                            <i class="material-icons">event</i>
+                            <span>Mis Citas</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="material-icons">event_available</i>
+                            <span>Calendario</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="material-icons">schedule</i>
+                            <span>Mis Pagos</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a th:href="@{/logout}" class="cerrar-sesion">
+                            <i class="material-icons">logout</i>
+                            <span>Cerrar Sesión</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <!-- VISTA DEL FORMULARIO DE RESERVA -->
+            <!-- FONDO ANIMADO -->
+        <div class="contenido">
+
+            <!-- BARRA SUPERIOR (TOPBAR) -->
+            <header class="topbar">
+                <nav class="nav-wrapper">
+                    <a href="#" class="brand-logo">
+                        <img th:src="@{/img/logo-sisbar.png}" alt="Logo SISBAR">
+                    </a>
+
+                    <a href="#" class="sidenav-trigger" data-target="mobile-menu" aria-label="Abrir menú móvil">
+                        <i class="material-icons">menu</i>
+                    </a>
+
+                    <a class="usuario">
+                        <i class="material-icons icono-barbero">content_cut</i>
+                        <span th:text="${usuario.nombreCompleto()}">BARBERO</span>
+                    </a>
+                                </nav>
+
+                <!-- MENÚ RESPONSIVE -->
+                <ul class="sidenav" id="mobile-menu">
+                    <li class="sidebar-header">
+                        <div class="fila-superior">
+                            <div class="icono"><i class="material-icons">content_cut</i></div>
+                            <h2>SISBAR</h2>
+                        </div>
+                        <p>Panel del Barbero</p>
+                    </li>
+                    <li><a href="#"><i class="material-icons">event</i><span>Inicio</span></a></li>
+                    <li><a href="#"><i class="material-icons">event_available</i><span>Agendar Cita</span></a></li>
+                    <li><a href="#"><i class="material-icons">schedule</i><span>Mis Citas</span></a></li>
+                    <li><a th:href="@{/logout}" class="cerrar-sesion"><i class="material-icons">logout</i><span>Cerrar Sesión</span></a></li>
+                </ul>
+            </header>
+
+            <div class="stars-background">
+                    <div id="stars"></div>
+                    <div id="stars2"></div>
+                    <div id="stars3"></div>
+                    <main>
+                        <!-- SECCIÓN 1: ENCABEZADO -->
+                        <section class="header-section">
+                            <h3>PANEL DEL BARBERO</h3>
+                            <h1 th:text="'Hola ' + ${usuario.nombre}">Hola Alejandro</h1>
+                        </section>
+
+                        <!-- Mensajes de éxito o error enviados por el controlador -->
+                        <div class="mensajes-modulo">
+                            <div class="alerta alerta-exito" th:if="${exito}" th:text="${exito}">Éxito</div>
+                            <div class="alerta alerta-error" th:if="${error}" th:text="${error}">Error</div>
+                        </div>
+
+                        <!-- SECCIÓN 2: TARJETAS DE ESTADÍSTICAS (calculadas en CitaBarberoControlador) -->
+                        <section class="stats-section">
+                            <div class="stat-card">
+                            <div class="stat-icon"><i class="material-icons">calendar_today</i></div>
+                            <div class="stat-value" th:text="${totalCitas}">1</div>
+                            <div class="stat-label" th:text="${dia == hoy} ? 'Citas hoy' : 'Citas del día'">Citas hoy</div>
+                            </div>
+                            <div class="stat-card">
+                            <div class="stat-icon"><i class="material-icons">check_circle</i></div>
+                            <div class="stat-value" th:text="${completadas}">1</div>
+                            <div class="stat-label">Completadas</div>
+                            </div>
+                            <div class="stat-card">
+                            <div class="stat-icon"><i class="material-icons">attach_money</i></div>
+                            <div class="stat-value gold" th:text="'$' + ${#numbers.formatDecimal(ingresos, 1, 'POINT', 0, 'COMMA')}">$280</div>
+                            <div class="stat-label">Ingresos del día</div>
+                            </div>
+                        </section>
+
+                        <!-- Selector de día (formulario GET) -->
+                        <form class="filtros-citas" method="get" th:action="@{/barbero/citas}">
+                            <div class="filtro">
+                                <label for="fechaAgenda">Ver agenda del día</label>
+                                <input id="fechaAgenda" type="date" name="fecha" th:value="${dia}" required>
+                            </div>
+                            <button type="submit" class="btn-filtrar"><i class="material-icons">search</i> Ver</button>
+                            <a th:href="@{/barbero/citas}" class="btn-limpiar">Hoy</a>
+                        </form>
+
+                        <!-- SECCIÓN 3: CITAS ASIGNADAS -->
+                        <section class="appointments-section">
+                            <div class="appointments-header">
+                            <h2 th:text="'CITAS ASIGNADAS · ' + ${#temporals.format(dia, 'dd/MM/yyyy')}">CITAS ASIGNADAS</h2>
+                            </div>
+
+                            <p class="sin-datos" th:if="${#lists.isEmpty(citas)}">No tienes citas para este día.</p>
+
+                            <!-- Una fila por cada cita del barbero -->
+                            <div class="appointment-row" th:each="c : ${citas}">
+                            <div class="appointment-left">
+                                <div class="avatar" th:text="${c.cliente.usuario.nombre.substring(0,1)}">C</div>
+                                <div>
+                                <div class="appointment-name" th:text="${c.cliente.usuario.nombre + ' ' + c.cliente.usuario.apellido}">Carlos Ramírez</div>
+                                <div class="appointment-detail">
+                                    <span th:text="${c.servicio != null} ? ${c.servicio.nombre} : 'Servicio'">Corte Clásico</span>
+                                    <span th:text="${#temporals.format(c.fechaCita, 'yyyy-MM-dd')} + ' a las ' + ${#temporals.format(c.fechaCita, 'HH:mm')}">2026-06-20 a las 10:00</span>
+                                </div>
+                                <div class="appointment-detail observacion" th:if="${c.observaciones}" th:text="'Nota: ' + ${c.observaciones}">Nota</div>
+                                <div class="appointment-tags">
+                                    <span class="badge-estado" th:classappend="${#strings.toLowerCase(c.estado.name())}" th:text="${c.estado.etiqueta}">Pendiente</span>
+                                    <span class="appointment-price"
+                                          th:text="${c.servicio != null} ? '$' + ${#numbers.formatDecimal(c.servicio.precio, 1, 'POINT', 0, 'COMMA')} : ''">$150</span>
+                                    <span class="appointment-detail" th:if="${c.fechaAtencion}"
+                                          th:text="'Atendida: ' + ${#temporals.format(c.fechaAtencion, 'dd/MM HH:mm')}">Atendida</span>
+                                </div>
+                                </div>
+                            </div>
+                            <!-- Confirmar servicio (HU06): solo citas activas de hoy o días anteriores -->
+                            <form th:if="${c.activa and !c.fechaCita.toLocalDate().isAfter(hoy)}" method="post"
+                                  th:action="@{/barbero/citas/{id}/confirmar(id=${c.id})}">
+                                <input type="hidden" name="fecha" th:value="${dia}">
+                                <button type="submit" class="btn-confirm">
+                                    <i class="material-icons">check_circle</i>
+                                    CONFIRMAR REALIZADO
+                                </button>
+                            </form>
+                            </div>
+                        </section>
+                    </main>
+            </div> <!-- fin stars-background -->
+
+            </div>
+    </div>
+
+    <!-- JavaScript de Materialize -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            M.AutoInit();
+        });
+    </script>
+</body>
+</html>

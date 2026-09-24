@@ -31,4 +31,8 @@ public record UsuarioSesion(Integer id, String nombre, String apellido, String r
     public boolean esCliente() {
         return "CLIENTE".equals(rol);
     }
+
+    public boolean esBarbero() {
+        return "BARBERO".equals(rol);
+    }
 }

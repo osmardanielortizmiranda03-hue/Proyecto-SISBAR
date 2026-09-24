@@ -261,7 +261,10 @@
 
                                     <!-- Una fila por cada cita (th:each) -->
                                     <tr th:each="c : ${citas}">
-                                        <td><strong th:text="${c.servicio != null} ? ${c.servicio.nombre} : 'Servicio'">Corte Clásico</strong></td>
+                                        <td>
+                                            <strong th:text="${c.servicio != null} ? ${c.servicio.nombre} : 'Servicio'">Corte Clásico</strong>
+                                            <div class="observacion" th:if="${c.observaciones}" th:text="${c.observaciones}">Sin gel</div>
+                                        </td>
                                         <td th:text="${c.barbero.nombreCompleto}">Carlos Ramírez</td>
                                         <td th:text="${#temporals.format(c.fechaCita, 'yyyy-MM-dd')}">2026-06-20</td>
                                         <td th:text="${#temporals.format(c.fechaCita, 'HH:mm')}">10:00</td>
@@ -273,14 +276,15 @@
                                         </td>
                                         <td>
                                             <!-- Cancelar usa POST porque modifica datos -->
-                                            <form th:if="${c.cancelablePorCliente}" method="post"
+                                            <form th:if="${c.esCancelableEn(ahora)}" method="post"
                                                   th:action="@{/cliente/citas/{id}/cancelar(id=${c.id})}"
                                                   onsubmit="return confirm('¿Seguro que deseas cancelar esta cita?');">
                                                 <button type="submit" class="btn-cancelar">
                                                     <i class="material-icons">cancel</i> Cancelar
                                                 </button>
                                             </form>
-                                            <span th:unless="${c.cancelablePorCliente}" class="sin-accion">—</span>
+                                            <span th:if="${!c.esCancelableEn(ahora) and c.activa}" class="sin-accion">Ya no se puede cancelar</span>
+                                            <span th:if="${!c.activa}" class="sin-accion">—</span>
                                         </td>
                                     </tr>
                                 </tbody>

@@ -227,6 +227,45 @@ class CitaServicioTest {
     }
 
     @Test
+    @DisplayName("No se puede cancelar con menos de 2 horas de anticipación (HU05)")
+    void noCancelaCercaDeLaHora() {
+        Cita cita = citaActiva(HOY.atTime(11, 30));   // son las 10:00: faltan 1 h 30 min
+        cita.setCliente(new Cliente(4));
+        when(citaRepositorio.findById(7)).thenReturn(Optional.of(cita));
+
+        ReglaNegocioException error = assertThrows(ReglaNegocioException.class,
+                () -> servicio.cancelarPorCliente(7, 4));
+
+        assertTrue(error.getMessage().contains("2 horas"));
+        assertEquals(EstadoCita.PENDIENTE, cita.getEstado());
+    }
+
+    @Test
+    @DisplayName("El barbero confirma un servicio de hoy y queda la fecha de atención (HU06)")
+    void barberoConfirmaServicio() {
+        Cita cita = citaActiva(HOY.atTime(9, 0));
+        when(citaRepositorio.findById(3)).thenReturn(Optional.of(cita));
+
+        servicio.confirmarServicio(3, 2);
+
+        assertEquals(EstadoCita.COMPLETADA, cita.getEstado());
+        assertEquals(HOY.atTime(10, 0), cita.getFechaAtencion());
+    }
+
+    @Test
+    @DisplayName("El barbero no puede confirmar citas de otro barbero ni citas futuras")
+    void barberoNoConfirmaAjenaNiFutura() {
+        Cita ajena = citaActiva(HOY.atTime(9, 0));
+        when(citaRepositorio.findById(3)).thenReturn(Optional.of(ajena));
+        assertThrows(ReglaNegocioException.class, () -> servicio.confirmarServicio(3, 999));
+
+        Cita futura = citaActiva(MANANA.atTime(9, 0));
+        when(citaRepositorio.findById(4)).thenReturn(Optional.of(futura));
+        assertThrows(ReglaNegocioException.class, () -> servicio.confirmarServicio(4, 2));
+        assertEquals(EstadoCita.PENDIENTE, futura.getEstado());
+    }
+
+    @Test
     @DisplayName("El administrador no puede modificar una cita completada")
     void adminNoModificaCitaCompletada() {
         Cita cita = citaActiva(HOY.minusDays(2).atTime(10, 0));

@@ -77,6 +77,11 @@ public class CitaServicio {
         return LocalDate.now(reloj);
     }
 
+    /** Fecha y hora actual según el reloj del sistema. */
+    public LocalDateTime ahora() {
+        return LocalDateTime.now(reloj);
+    }
+
     /**
      * Calcula los horarios libres de un barbero en una fecha para un servicio (paso 4).
      *
@@ -174,10 +179,47 @@ public class CitaServicio {
         if (!cita.getCliente().getId().equals(usuarioClienteId)) {
             throw new ReglaNegocioException("No puedes cancelar una cita que no es tuya.");
         }
-        if (!cita.isCancelablePorCliente()) {
+        if (!cita.isActiva()) {
             throw new ReglaNegocioException("Esta cita ya no se puede cancelar.");
         }
+        if (!cita.esCancelableEn(ahora())) {
+            throw new ReglaNegocioException("Las citas solo se pueden cancelar con mínimo "
+                    + Cita.HORAS_MINIMAS_CANCELACION + " horas de anticipación.");
+        }
         cita.setEstado(EstadoCita.CANCELADA);
+        citaRepositorio.save(cita);
+    }
+
+    // =====================================================================
+    //  Operaciones del barbero (HU04 y HU06)
+    // =====================================================================
+
+    /** Agenda del barbero para un día, ordenada por hora. */
+    @Transactional(readOnly = true)
+    public List<Cita> agendaDelBarbero(Integer barberoId, LocalDate fecha) {
+        return citaRepositorio.findByBarberoIdAndFechaCitaBetweenOrderByFechaCitaAsc(
+                barberoId, fecha.atStartOfDay(), fecha.atTime(LocalTime.MAX));
+    }
+
+    /**
+     * El barbero confirma que realizó el servicio (HU06 / RF06).
+     * La cita debe ser suya, estar activa y ser de hoy o de un día anterior.
+     */
+    @Transactional
+    public void confirmarServicio(Integer citaId, Integer barberoId) {
+        Cita cita = buscar(citaId);
+        if (!cita.getBarbero().getId().equals(barberoId)) {
+            throw new ReglaNegocioException("Esa cita no está asignada a ti.");
+        }
+        if (!cita.isActiva()) {
+            throw new ReglaNegocioException("La cita #" + citaId + " ya está "
+                    + cita.getEstado().getEtiqueta().toLowerCase() + ".");
+        }
+        if (cita.getFechaCita().toLocalDate().isAfter(hoy())) {
+            throw new ReglaNegocioException("Solo puedes confirmar servicios de hoy o de días anteriores.");
+        }
+        cita.setEstado(EstadoCita.COMPLETADA);
+        cita.setFechaAtencion(ahora());
         citaRepositorio.save(cita);
     }
 
@@ -221,6 +263,9 @@ public class CitaServicio {
                     + cita.getEstado().getEtiqueta().toLowerCase() + " y no se puede modificar.");
         }
         cita.setEstado(nuevoEstado);
+        if (nuevoEstado == EstadoCita.COMPLETADA) {
+            cita.setFechaAtencion(ahora());
+        }
         citaRepositorio.save(cita);
     }
 

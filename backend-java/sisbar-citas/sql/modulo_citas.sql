@@ -6,8 +6,9 @@
 --  Es seguro ejecutarlo varias veces: no borra datos.
 --
 --  Qué hace:
---   1. Agrega a la tabla "citas" las columnas que pide el prototipo
---      (servicio elegido y observaciones), solo si no existen.
+--   1. Agrega a la tabla "citas" las columnas que piden el prototipo y las
+--      historias de usuario (servicio, observaciones y fecha de atención),
+--      solo si no existen.
 --   2. Crea 2 barberos de prueba (los mismos del prototipo agendarcita.html).
 --   3. Crea un cliente de prueba para agendar citas.
 -- =====================================================================
@@ -43,7 +44,20 @@ EXECUTE sentencia;
 DEALLOCATE PREPARE sentencia;
 
 -- ---------------------------------------------------------------------
+-- 2b. Columna "fecha_atencion": cuándo el barbero confirmó el servicio (HU06)
+-- ---------------------------------------------------------------------
+SET @existe := (SELECT COUNT(*) FROM information_schema.COLUMNS
+                WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'citas' AND COLUMN_NAME = 'fecha_atencion');
+SET @sql := IF(@existe = 0,
+    'ALTER TABLE citas ADD COLUMN fecha_atencion DATETIME NULL AFTER observaciones',
+    'SELECT ''La columna fecha_atencion ya existe'' AS mensaje');
+PREPARE sentencia FROM @sql;
+EXECUTE sentencia;
+DEALLOCATE PREPARE sentencia;
+
+-- ---------------------------------------------------------------------
 -- 3. Barberos de prueba (contraseña de ambos: Barbero123)
+--    correos: carlos.barbero@sisbar.com / rodrigo.barbero@sisbar.com
 --    Hash SHA-256 de "Barbero123"
 -- ---------------------------------------------------------------------
 INSERT INTO usuario (nombre, apellido, correo_usuario, telefono_usuario, fecha_de_nacimiento,

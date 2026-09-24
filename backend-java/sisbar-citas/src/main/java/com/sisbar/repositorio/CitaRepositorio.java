@@ -37,6 +37,10 @@ public interface CitaRepositorio extends JpaRepository<Cita, Integer> {
                                 @Param("desde") LocalDateTime desde,
                                 @Param("hasta") LocalDateTime hasta);
 
+    /** Agenda de un barbero en un rango de fechas, de la más temprana a la más tardía (HU04). */
+    List<Cita> findByBarberoIdAndFechaCitaBetweenOrderByFechaCitaAsc(
+            Integer barberoId, LocalDateTime desde, LocalDateTime hasta);
+
     /** Cantidad de citas por estado (para las tarjetas de resumen del administrador). */
     long countByEstado(EstadoCita estado);
 }
